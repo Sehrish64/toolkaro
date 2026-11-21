@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Image to Text (OCR) Converter – Free Online | ToolKaro</title>
+<meta name="description" content="Image ya photo se text nikalein — English, Urdu, Hindi. Free, bina sign-up, image browser se bahar nahi jati.">
+<link rel="canonical" href="https://toolkaro.sehrishcreatespk.com/image-to-text.html">
+<meta property="og:title" content="Image to Text (OCR) Converter – Free Online | ToolKaro">
+<meta property="og:description" content="Image ya photo se text nikalein — English, Urdu, Hindi. Free, bina sign-up, image browser se bahar nahi jati.">
+<!-- Google AdSense: apna script yahan paste karo (README dekho) -->
+<style>.seo{margin-top:34px;line-height:1.65}.seo h2{font-size:19px;margin:22px 0 8px}.seo a{color:var(--ac)}.seo ol,.seo ul{padding-left:20px}.links{columns:2;font-size:14px}footer{margin:30px 0 10px;color:var(--mut);font-size:13px;text-align:center}footer a{color:var(--mut);margin:0 6px}</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.0.4/tesseract.min.js"></script>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#6b7590;--ac:#1f6feb;--bd:#dde2ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#1a2130;--tx:#eef1f8;--mut:#9aa5bf;--ac:#4c8dff;--bd:#2b3448;color-scheme:dark}}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:760px;margin:auto;padding:0 16px 40px}
+h1{font-size:24px;margin:22px 0 4px}
+.sub{color:var(--mut);font-size:14px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.card b{display:block;font-size:30px;margin-bottom:8px}
+.card span{font-weight:600;display:block}
+.card small{color:var(--mut)}
+button{font:inherit;cursor:pointer}
+.pri{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.pri:disabled{opacity:.5}
+.ghost{background:none;border:0;color:var(--ac);padding:8px 0;font-weight:600}
+.panel{display:none}
+.panel.on{display:block}
+.drop{border:2px dashed var(--bd);border-radius:14px;padding:26px;text-align:center;color:var(--mut);background:var(--card);margin:14px 0;cursor:pointer}
+.files{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.f{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;font-size:14px;gap:8px}
+.f span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.f button{background:none;border:0;color:var(--mut);font-size:16px;padding:2px 6px}
+label{display:block;font-size:14px;color:var(--mut);margin:10px 0 4px}
+input[type=text],select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit}
+#st{margin-top:12px;font-size:14px;color:var(--mut);min-height:20px}
+input[type=file]{display:none}
+textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;resize:vertical}
+#xo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;margin-top:4px}
+h3{font-size:15px;margin:22px 0 10px;color:var(--mut)}
+.ck{background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/16px 16px;border-radius:10px;line-height:0;touch-action:none;overflow:hidden}
+.ck canvas{width:100%;height:auto;display:block;touch-action:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.row button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:9px 12px;font-size:14px}
+.row .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+#cbox{position:relative;line-height:0;overflow:hidden;display:inline-block;max-width:100%}
+#cbox img{max-width:100%;max-height:52vh;display:block;user-select:none}
+.cr{position:absolute;border:2px solid var(--ac);box-shadow:0 0 0 999px rgba(0,0,0,.45);touch-action:none}
+.hd{position:absolute;width:28px;height:28px;background:var(--ac);border:3px solid #fff;border-radius:50%;touch-action:none}
+input[type=range]{width:100%}
+.note{font-size:12px;color:var(--mut);margin-top:26px;text-align:center}
+</style></head>
+<body>
+<nav style="padding:12px 0;font-size:14px;display:flex;gap:14px;flex-wrap:wrap"><a href="index.html">🧰 ToolKaro</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a></nav><div id="ad-top"></div>
+<h1>Image to Text (OCR)</h1>
+<div class="sub">Image ya photo se text nikalein — English, Urdu, Hindi. File browser se bahar nahi jati.</div>
+
+<button class="ghost" onclick="location.href='index.html'">← Sab tools</button>
+<div class="drop" id="drop">📷 Image chuno ya yahan drop karo</div>
+<input id="fi" type="file" accept="image/jpeg,image/png,image/webp">
+<div id="prevwrap" style="display:none;margin:14px 0"><img id="prev" alt="Chosen image" style="max-width:100%;max-height:34vh;border-radius:10px;display:block;margin:0 auto"></div>
+<label>Text ki zaban</label>
+<select id="lang"><option value="eng">English</option><option value="urd">Urdu (اردو)</option><option value="hin">Hindi (हिन्दी)</option><option value="eng+urd">Auto (English + Urdu)</option></select>
+<button class="pri" id="go" style="margin-top:12px" disabled>🔍 Text nikalo</button>
+<div id="barwrap" style="display:none;height:8px;border-radius:6px;background:var(--bd);margin-top:12px;overflow:hidden"><div id="bar" style="height:100%;width:0;background:var(--ac)"></div></div>
+<div id="st"></div>
+<label>Result (yahan se select ya copy karo)</label>
+<textarea id="out" rows="9" dir="auto" placeholder="Nikla hua text yahan aayega"></textarea>
+<div class="row"><button id="cp">📋 Copy</button></div>
+<button class="pri" id="save" style="display:none;margin-top:10px">⬇ Text file save karo</button>
+<p class="note">Note: Pehli dafa zaban ka data download hota hai, thoda waqt lag sakta hai. Urdu/Hindi ka result type ki hui saaf text par behtar aata hai. Aapki image kabhi upload nahi hoti — pehchan aapke browser mein hoti hai.</p>
+<div id="ad-bottom"></div>
+<section class="seo"><h2>Image to Text (OCR) Converter – kaise karein?</h2><p>Image ya photo se text nikalein, phir select/copy karein. English, Urdu, Hindi sab chalta hai. ToolKaro ka ye tool free hai aur phone ya computer dono par chalta hai.</p><ol><li>Image chunein ya yahan drop karein (JPG, PNG ya WebP).</li><li>Text ki zaban chunein.</li><li>"Text nikalo" dabayein, phir result copy karein ya .txt file save karein.</li></ol><h2>Aksar pooche jane wale sawal</h2><p><b>Kya Image to Text (OCR) tool free hai?</b><br>Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi.</p><p><b>Kya meri image kisi server par upload hoti hai?</b><br>Nahi. Text pehchanne ka saara kaam aapke browser mein hota hai, aapki image aapke device se bahar nahi jati. Sirf pehli dafa zaban ka data (language file) internet se download hota hai.</p><p><b>Pehli dafa zyada waqt kyun lagta hai?</b><br>Pehli dafa browser zaban ka data download karta hai, is liye thoda waqt lag sakta hai. Agli dafa ye data browser mein save ho jata hai aur tool tez chalega.</p><p><b>Urdu ya Hindi text kitna sahi aayega?</b><br>Type ki hui saaf aur seedhi text par result behtar aata hai. Hath ki likhai, terhi (skew) ya dhundli photo par ghaltiyan ho sakti hain.</p><h2>Aur tools</h2><ul class="links"><li><a href="scan-to-pdf.html">Scan to PDF Online</a></li><li><a href="annotate-pdf.html">Annotate PDF – Highlight &amp; Text</a></li><li><a href="pdf-to-text.html">PDF to Text Converter</a></li><li><a href="images-to-pdf.html">Images to PDF Converter</a></li><li><a href="merge-pdf.html">Merge PDF Files</a></li><li><a href="split-pdf.html">Split PDF – Extract Pages</a></li><li><a href="rotate-pdf.html">Rotate PDF Pages</a></li><li><a href="add-page-numbers-to-pdf.html">Add Page Numbers to PDF</a></li><li><a href="protect-pdf-with-password.html">Protect PDF with Password</a></li><li><a href="unlock-pdf.html">Unlock PDF</a></li><li><a href="word-to-pdf.html">Word to PDF Converter</a></li><li><a href="pdf-to-word.html">PDF to Word Converter</a></li><li><a href="pdf-to-jpg.html">PDF to JPG Converter</a></li><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="sign-pdf.html">Sign PDF Online</a></li><li><a href="document-scanner-auto-crop.html">Document Scanner with Auto Crop</a></li><li><a href="background-remover.html">Image Background Remover</a></li><li><a href="image-cropper.html">Image Cropper &amp; Circle Cutter</a></li><li><a href="video-trimmer.html">Video Trimmer – Cut Video Online</a></li><li><a href="video-compressor.html">Video Compressor</a></li><li><a href="qr-code-generator.html">QR Code Generator</a></li><li><a href="passport-photo-maker.html">Passport Size Photo Maker</a></li><li><a href="heic-to-jpg.html">HEIC to JPG Converter</a></li><li><a href="image-compressor-converter.html">Image Compressor &amp; Converter</a></li><li><a href="resize-image-add-watermark.html">Resize Image &amp; Add Watermark</a></li><li><a href="gif-maker.html">GIF Maker from Images</a></li><li><a href="audio-compressor.html">Audio Compressor (MP3)</a></li><li><a href="audio-converter.html">Audio Converter – MP3 / WAV</a></li><li><a href="json-csv-base64-converter.html">JSON, CSV, Base64 &amp; URL Converter</a></li><li><a href="unit-converter.html">Unit Converter</a></li><li><a href="meta-tag-generator.html">Meta Tag Generator</a></li><li><a href="url-slug-generator.html">URL Slug Generator</a></li><li><a href="word-counter-keyword-density.html">Word Counter &amp; Keyword Density</a></li><li><a href="sitemap-generator.html">Sitemap.xml Generator</a></li><li><a href="robots-txt-generator.html">Robots.txt Generator</a></li><li><a href="schema-markup-generator.html">Schema Markup Generator (JSON-LD)</a></li></ul></section><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kya Image to Text (OCR) tool free hai?", "acceptedAnswer": {"@type": "Answer", "text": "Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi."}}, {"@type": "Question", "name": "Kya meri image kisi server par upload hoti hai?", "acceptedAnswer": {"@type": "Answer", "text": "Nahi. Text pehchanne ka saara kaam aapke browser mein hota hai, aapki image aapke device se bahar nahi jati. Sirf pehli dafa zaban ka data (language file) internet se download hota hai."}}, {"@type": "Question", "name": "Pehli dafa zyada waqt kyun lagta hai?", "acceptedAnswer": {"@type": "Answer", "text": "Pehli dafa browser zaban ka data download karta hai, is liye thoda waqt lag sakta hai. Agli dafa ye data browser mein save ho jata hai aur tool tez chalega."}}, {"@type": "Question", "name": "Urdu ya Hindi text kitna sahi aayega?", "acceptedAnswer": {"@type": "Answer", "text": "Type ki hui saaf aur seedhi text par result behtar aata hai. Hath ki likhai, terhi (skew) ya dhundli photo par ghaltiyan ho sakti hain."}}]}</script><footer><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><br>© ToolKaro. Sab tools free hain.</footer>
+<script>
+const $=s=>document.querySelector(s);
+let imgFile=null;
+const drop=$('#drop'),fi=$('#fi');
+function msg(t){$('#st').textContent=t}
+function setFile(f){
+ if(!f)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(f.type)&&!/\.(jpe?g|png|webp)$/i.test(f.name)){msg('Sirf JPG, PNG ya WebP image chunein.');return}
+ imgFile=f;$('#prev').src=URL.createObjectURL(f);$('#prevwrap').style.display='block';
+ drop.textContent='📷 Doosri image chuno';$('#go').disabled=false;$('#out').value='';$('#save').style.display='none';
+ msg('Image tayyar hai. Zaban chun kar "Text nikalo" dabayein.')}
+drop.onclick=()=>fi.click();
+fi.onchange=()=>setFile(fi.files[0]);
+['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.style.borderColor='var(--ac)'}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.style.borderColor=''}));
+drop.addEventListener('drop',ev=>setFile(ev.dataTransfer.files[0]));
+$('#cp').onclick=async()=>{const o=$('#out');if(!o.value){msg('Pehle text nikalein.');return}o.select();try{await navigator.clipboard.writeText(o.value)}catch(e){document.execCommand('copy')}msg('Copy ho gaya ✅')};
+$('#save').onclick=()=>{const b=new Blob([$('#out').value],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='image-text.txt';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},400)};
+$('#go').onclick=async()=>{
+ if(!imgFile)return;
+ const go=$('#go');go.disabled=true;$('#save').style.display='none';
+ const bar=$('#bar'),bw=$('#barwrap');bw.style.display='block';bar.style.width='0';
+ msg('Tayyari ho rahi hai — pehli dafa zaban ka data download hoga…');
+ try{
+  const r=await Tesseract.recognize(imgFile,$('#lang').value,{logger:m=>{
+   if(m.status==='recognizing text'){const p=Math.round((m.progress||0)*100);bar.style.width=p+'%';msg('Text pehchan raha hoon… '+p+'%')}
+   else if(m.status)msg('Kaam chal raha hai: '+m.status+'…')}});
+  const t=(r.data.text||'').trim();
+  $('#out').value=t;bar.style.width='100%';
+  if(t){msg('Ho gaya. Text select/copy kar lo.');$('#save').style.display='block'}
+  else msg('Is image mein koi text nahi mila. Saaf aur seedhi photo try karein.');
+ }catch(e){msg('Error: '+((e&&e.message)||e))}
+ go.disabled=false};
+</script></body></html>

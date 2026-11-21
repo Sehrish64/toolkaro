@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PDF to Word Converter – Free Online | ToolKaro</title>
+<meta name="description" content="Text wali PDF ko Word (.docx) file mein badlein. Free, bina sign-up — sirf text aayega, asal layout nahi.">
+<link rel="canonical" href="https://toolkaro.sehrishcreatespk.com/pdf-to-word.html">
+<meta property="og:title" content="PDF to Word Converter – Free Online | ToolKaro">
+<meta property="og:description" content="Text wali PDF ko Word (.docx) file mein badlein. Free, bina sign-up — sirf text aayega, asal layout nahi.">
+<!-- Google AdSense: apna script yahan paste karo (README dekho) -->
+<style>.seo{margin-top:34px;line-height:1.65}.seo h2{font-size:19px;margin:22px 0 8px}.seo a{color:var(--ac)}.seo ol,.seo ul{padding-left:20px}.links{columns:2;font-size:14px}footer{margin:30px 0 10px;color:var(--mut);font-size:13px;text-align:center}footer a{color:var(--mut);margin:0 6px}</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#6b7590;--ac:#1f6feb;--bd:#dde2ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#1a2130;--tx:#eef1f8;--mut:#9aa5bf;--ac:#4c8dff;--bd:#2b3448;color-scheme:dark}}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:760px;margin:auto;padding:0 16px 40px}
+h1{font-size:24px;margin:22px 0 4px}
+.sub{color:var(--mut);font-size:14px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.card b{display:block;font-size:30px;margin-bottom:8px}
+.card span{font-weight:600;display:block}
+.card small{color:var(--mut)}
+button{font:inherit;cursor:pointer}
+.pri{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.pri:disabled{opacity:.5}
+.ghost{background:none;border:0;color:var(--ac);padding:8px 0;font-weight:600}
+.panel{display:none}
+.panel.on{display:block}
+.drop{border:2px dashed var(--bd);border-radius:14px;padding:26px;text-align:center;color:var(--mut);background:var(--card);margin:14px 0;cursor:pointer}
+.files{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.f{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;font-size:14px;gap:8px}
+.f span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.f button{background:none;border:0;color:var(--mut);font-size:16px;padding:2px 6px}
+label{display:block;font-size:14px;color:var(--mut);margin:10px 0 4px}
+input[type=text],select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit}
+#st{margin-top:12px;font-size:14px;color:var(--mut);min-height:20px}
+input[type=file]{display:none}
+textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;resize:vertical}
+#xo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;margin-top:4px}
+h3{font-size:15px;margin:22px 0 10px;color:var(--mut)}
+.ck{background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/16px 16px;border-radius:10px;line-height:0;touch-action:none;overflow:hidden}
+.ck canvas{width:100%;height:auto;display:block;touch-action:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.row button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:9px 12px;font-size:14px}
+.row .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+#cbox{position:relative;line-height:0;overflow:hidden;display:inline-block;max-width:100%}
+#cbox img{max-width:100%;max-height:52vh;display:block;user-select:none}
+.cr{position:absolute;border:2px solid var(--ac);box-shadow:0 0 0 999px rgba(0,0,0,.45);touch-action:none}
+.hd{position:absolute;width:28px;height:28px;background:var(--ac);border:3px solid #fff;border-radius:50%;touch-action:none}
+input[type=range]{width:100%}
+.note{font-size:12px;color:var(--mut);margin-top:26px;text-align:center}
+</style></head>
+<body>
+<nav style="padding:12px 0;font-size:14px;display:flex;gap:14px;flex-wrap:wrap"><a href="index.html">🧰 ToolKaro</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a></nav><div id="ad-top"></div>
+<h1>PDF to Word Converter</h1>
+<div class="sub">Text wali PDF ko Word (.docx) file mein badlein — sirf text aayega, asal layout nahi.</div>
+
+<button class="ghost" onclick="location.href='index.html'">← Sab tools</button>
+<div class="drop" id="drop">+ PDF chuno</div>
+<input id="fi" type="file" accept="application/pdf">
+<div class="files" id="fl"></div>
+<button class="pri" id="go" disabled>Word file banao</button>
+<div id="st"></div>
+<p class="note">Note: Ye tool text wali PDF ke liye hai — asal layout/design Word mein nahi aayega, sirf text aayega. Scanned PDF ke liye pehle <a href="image-to-text.html">Image to Text (OCR)</a> tool istemal karo.</p>
+<div id="ad-bottom"></div>
+<section class="seo"><h2>PDF to Word Converter – kaise karein?</h2><p>Text wali PDF ko Word (.docx) file mein badlein taake text edit kar sako. ToolKaro ka ye tool free hai aur phone ya computer dono par chalta hai.</p><ol><li>PDF chunein (+ button dabayein).</li><li>"Word file banao" dabayein.</li><li>Tayyar .docx file download karein aur Word mein khol kar edit karein.</li></ol><h2>Aksar pooche jane wale sawal</h2><p><b>Kya PDF to Word Converter free hai?</b><br>Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi.</p><p><b>Kya meri PDF kisi server par upload hoti hai?</b><br>Nahi. Saari processing aapke browser mein hoti hai, aapki file aapke device se bahar nahi jati.</p><p><b>Kya PDF ka design aur layout bhi Word mein aayega?</b><br>Nahi. Ye tool sirf text nikal kar Word file banata hai — table, columns aur design asal jaise nahi aayenge. Har page ka text Word mein alag page par aayega.</p><p><b>Meri PDF se text nahi aaya, kyun?</b><br>Shayad PDF scanned hai (photo wali PDF). Us ke liye pehle <a href="image-to-text.html">Image to Text (OCR)</a> tool istemal karein.</p><h2>Aur tools</h2><ul class="links"><li><a href="scan-to-pdf.html">Scan to PDF Online</a></li><li><a href="annotate-pdf.html">Annotate PDF – Highlight &amp; Text</a></li><li><a href="pdf-to-text.html">PDF to Text Converter</a></li><li><a href="image-to-text.html">Image to Text (OCR)</a></li><li><a href="images-to-pdf.html">Images to PDF Converter</a></li><li><a href="merge-pdf.html">Merge PDF Files</a></li><li><a href="split-pdf.html">Split PDF – Extract Pages</a></li><li><a href="rotate-pdf.html">Rotate PDF Pages</a></li><li><a href="add-page-numbers-to-pdf.html">Add Page Numbers to PDF</a></li><li><a href="protect-pdf-with-password.html">Protect PDF with Password</a></li><li><a href="unlock-pdf.html">Unlock PDF</a></li><li><a href="word-to-pdf.html">Word to PDF Converter</a></li><li><a href="pdf-to-jpg.html">PDF to JPG Converter</a></li><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="sign-pdf.html">Sign PDF Online</a></li><li><a href="document-scanner-auto-crop.html">Document Scanner with Auto Crop</a></li><li><a href="background-remover.html">Image Background Remover</a></li><li><a href="image-cropper.html">Image Cropper &amp; Circle Cutter</a></li><li><a href="video-trimmer.html">Video Trimmer – Cut Video Online</a></li><li><a href="video-compressor.html">Video Compressor</a></li><li><a href="qr-code-generator.html">QR Code Generator</a></li><li><a href="passport-photo-maker.html">Passport Size Photo Maker</a></li><li><a href="heic-to-jpg.html">HEIC to JPG Converter</a></li><li><a href="image-compressor-converter.html">Image Compressor &amp; Converter</a></li><li><a href="resize-image-add-watermark.html">Resize Image &amp; Add Watermark</a></li><li><a href="gif-maker.html">GIF Maker from Images</a></li><li><a href="audio-compressor.html">Audio Compressor (MP3)</a></li><li><a href="audio-converter.html">Audio Converter – MP3 / WAV</a></li><li><a href="json-csv-base64-converter.html">JSON, CSV, Base64 &amp; URL Converter</a></li><li><a href="unit-converter.html">Unit Converter</a></li><li><a href="meta-tag-generator.html">Meta Tag Generator</a></li><li><a href="url-slug-generator.html">URL Slug Generator</a></li><li><a href="word-counter-keyword-density.html">Word Counter &amp; Keyword Density</a></li><li><a href="sitemap-generator.html">Sitemap.xml Generator</a></li><li><a href="robots-txt-generator.html">Robots.txt Generator</a></li><li><a href="schema-markup-generator.html">Schema Markup Generator (JSON-LD)</a></li></ul></section><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kya PDF to Word Converter free hai?", "acceptedAnswer": {"@type": "Answer", "text": "Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi."}}, {"@type": "Question", "name": "Kya meri PDF kisi server par upload hoti hai?", "acceptedAnswer": {"@type": "Answer", "text": "Nahi. Saari processing aapke browser mein hoti hai, aapki file aapke device se bahar nahi jati."}}, {"@type": "Question", "name": "Kya PDF ka design aur layout bhi Word mein aayega?", "acceptedAnswer": {"@type": "Answer", "text": "Nahi. Ye tool sirf text nikal kar Word file banata hai — table, columns aur design asal jaise nahi aayenge. Har page ka text Word mein alag page par aayega."}}, {"@type": "Question", "name": "Meri PDF se text nahi aaya, kyun?", "acceptedAnswer": {"@type": "Answer", "text": "Shayad PDF scanned hai (photo wali PDF). Us ke liye pehle Image to Text (OCR) tool istemal karein."}}]}</script><footer><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><br>© ToolKaro. Sab tools free hain.</footer>
+<script>
+const $=s=>document.querySelector(s);
+pdfjsLib.GlobalWorkerOptions.workerSrc='';
+let pdfFile=null;
+const drop=$('#drop'),fi=$('#fi');
+function msg(t){$('#st').textContent=t}
+function setFile(f){
+ if(!f)return;
+ if(f.type!=='application/pdf'&&!/\.pdf$/i.test(f.name)){msg('Sirf PDF file chunein.');return}
+ pdfFile=f;$('#fl').innerHTML='<div class="f"><span></span></div>';$('#fl span').textContent=f.name;
+ drop.textContent='+ Doosri PDF chuno';$('#go').disabled=false;msg('PDF tayyar hai. "Word file banao" dabayein.')}
+drop.onclick=()=>fi.click();
+fi.onchange=()=>setFile(fi.files[0]);
+['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.style.borderColor='var(--ac)'}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.style.borderColor=''}));
+drop.addEventListener('drop',ev=>setFile(ev.dataTransfer.files[0]));
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+$('#go').onclick=async()=>{
+ if(!pdfFile)return;
+ const go=$('#go');go.disabled=true;
+ try{
+  msg('PDF parh raha hoon…');
+  const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await pdfFile.arrayBuffer())}).promise;
+  const pages=[];let chars=0;
+  for(let n=1;n<=pdf.numPages;n++){
+   msg('Page '+n+'/'+pdf.numPages+' ka text nikal raha hoon…');
+   const pg=await pdf.getPage(n),tc=await pg.getTextContent();
+   const lines=[];let cur='';
+   tc.items.forEach(it=>{cur+=it.str;if(it.hasEOL){lines.push(cur);cur=''}});
+   if(cur)lines.push(cur);
+   chars+=lines.join('').trim().length;pages.push(lines)}
+  if(!chars){msg('Is PDF se text nahi mila — lagta hai ye scanned (photo wali) PDF hai. Pehle Image to Text (OCR) tool istemal karein.');go.disabled=false;return}
+  msg('Word file bana raha hoon…');
+  let body='';
+  pages.forEach((lines,pi)=>{
+   if(pi>0)body+='<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+   if(!lines.length)body+='<w:p/>';
+   lines.forEach(ln=>{body+=ln?'<w:p><w:r><w:t xml:space="preserve">'+esc(ln)+'</w:t></w:r></w:p>':'<w:p/>'})});
+  const docXml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr></w:body></w:document>';
+  const ctXml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+  const relsXml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+  const zip=new JSZip();
+  zip.file('[Content_Types].xml',ctXml);
+  zip.folder('_rels').file('.rels',relsXml);
+  zip.folder('word').file('document.xml',docXml);
+  const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=pdfFile.name.replace(/\.pdf$/i,'')+'.docx';
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},400);
+  msg('Ho gaya — Word (.docx) file download ho gayi. Kul '+pdf.numPages+' pages ka text aaya hai.');
+ }catch(e){msg('Error: '+((e&&e.message)||e))}
+ go.disabled=false};
+</script></body></html>
