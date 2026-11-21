@@ -1,2 +1,1 @@
-# AdSense approve hone ke baad yahan Google ki di hui line paste karo, jaise:
-# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-7906859242819945, DIRECT, f08c47fec0942fa0
