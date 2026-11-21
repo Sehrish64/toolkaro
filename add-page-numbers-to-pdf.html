@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Add Page Numbers to PDF – Free Online | ToolKaro</title>
+<meta name="description" content="PDF ke har page par number lagayein. Free, bina sign-up.">
+<link rel="canonical" href="https://toolkaro.sehrishcreatespk.com/add-page-numbers-to-pdf.html">
+<meta property="og:title" content="Add Page Numbers to PDF – Free Online | ToolKaro">
+<meta property="og:description" content="PDF ke har page par number lagayein. Free, bina sign-up.">
+<!-- Google AdSense: apna script yahan paste karo (README dekho) -->
+<style>.seo{margin-top:34px;line-height:1.65}.seo h2{font-size:19px;margin:22px 0 8px}.seo a{color:var(--ac)}.seo ol,.seo ul{padding-left:20px}.links{columns:2;font-size:14px}footer{margin:30px 0 10px;color:var(--mut);font-size:13px;text-align:center}footer a{color:var(--mut);margin:0 6px}</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#6b7590;--ac:#1f6feb;--bd:#dde2ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#1a2130;--tx:#eef1f8;--mut:#9aa5bf;--ac:#4c8dff;--bd:#2b3448;color-scheme:dark}}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:760px;margin:auto;padding:0 16px 40px}
+h1{font-size:24px;margin:22px 0 4px}
+.sub{color:var(--mut);font-size:14px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.card b{display:block;font-size:30px;margin-bottom:8px}
+.card span{font-weight:600;display:block}
+.card small{color:var(--mut)}
+button{font:inherit;cursor:pointer}
+.pri{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.pri:disabled{opacity:.5}
+.ghost{background:none;border:0;color:var(--ac);padding:8px 0;font-weight:600}
+.panel{display:none}
+.panel.on{display:block}
+.drop{border:2px dashed var(--bd);border-radius:14px;padding:26px;text-align:center;color:var(--mut);background:var(--card);margin:14px 0;cursor:pointer}
+.files{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.f{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;font-size:14px;gap:8px}
+.f span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.f button{background:none;border:0;color:var(--mut);font-size:16px;padding:2px 6px}
+label{display:block;font-size:14px;color:var(--mut);margin:10px 0 4px}
+input[type=text],select{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit}
+#st{margin-top:12px;font-size:14px;color:var(--mut);min-height:20px}
+input[type=file]{display:none}
+textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;resize:vertical}
+#xo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;margin-top:4px}
+h3{font-size:15px;margin:22px 0 10px;color:var(--mut)}
+.ck{background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/16px 16px;border-radius:10px;line-height:0;touch-action:none;overflow:hidden}
+.ck canvas{width:100%;height:auto;display:block;touch-action:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.row button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:9px 12px;font-size:14px}
+.row .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+#cbox{position:relative;line-height:0;overflow:hidden;display:inline-block;max-width:100%}
+#cbox img{max-width:100%;max-height:52vh;display:block;user-select:none}
+.cr{position:absolute;border:2px solid var(--ac);box-shadow:0 0 0 999px rgba(0,0,0,.45);touch-action:none}
+.hd{position:absolute;width:28px;height:28px;background:var(--ac);border:3px solid #fff;border-radius:50%;touch-action:none}
+input[type=range]{width:100%}
+.note{font-size:12px;color:var(--mut);margin-top:26px;text-align:center}
+</style></head>
+<body>
+<nav style="padding:12px 0;font-size:14px;display:flex;gap:14px;flex-wrap:wrap"><a href="index.html">🧰 ToolKaro</a><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a></nav><div id="ad-top"></div>
+<h1>Add Page Numbers to PDF</h1>
+<div class="sub">PDF ke har page par number lagayein.</div>
+
+<div id="home"></div>
+
+<div id="tool" class="panel">
+<button class="ghost" id="back">← Sab tools</button>
+<h2 id="tt" style="margin:4px 0"></h2>
+<div class="sub" id="td"></div>
+<div class="drop" id="drop">+ File chuno</div>
+<div class="files" id="fl"></div>
+<div id="opts"></div>
+<button class="pri" id="run" disabled>Start</button>
+<div id="st"></div>
+</div>
+<div id="xtool" class="panel"><button class="ghost" id="xback">← Sab tools</button><h2 id="xt" style="margin:4px 0"></h2><div class="sub" id="xd"></div><div id="xf"></div><button class="pri" id="xrun" style="margin-top:14px">Banao</button><label>Result</label><textarea id="xo" readonly rows="9"></textarea><button class="ghost" id="xcp">📋 Copy</button><div class="sub" id="xs"></div></div>
+<div id="etool" class="panel"><button class="ghost" id="eback">← Sab tools</button><h2 id="et" style="margin:4px 0"></h2><div class="sub" id="ed"></div><div id="eb"></div><button class="pri" id="esave" style="display:none;margin-top:14px"></button><div id="es" class="sub" style="margin-top:10px"></div></div>
+<input id="fi" type="file">
+<input id="cam" type="file" accept="image/*" capture="environment">
+<div id="ad-bottom"></div>
+<section class="seo"><h2>Add Page Numbers to PDF – kaise karein?</h2><p>PDF ke har page par number lagayein. ToolKaro ka ye tool free hai aur phone ya computer dono par chalta hai.</p><ol><li>File chunein (+ button dabayein).</li><li>Zaroori options set karein.</li><li>Start dabayein aur result download karein.</li></ol><h2>Aksar pooche jane wale sawal</h2><p><b>Kya Add Page Numbers to PDF free hai?</b><br>Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi.</p><p><b>Kya meri file ya text kisi server par upload hota hai?</b><br>Nahi. Saari processing aapke browser mein hoti hai, aapka data aapke device se bahar nahi jata.</p><h2>Aur tools</h2><ul class="links"><li><a href="scan-to-pdf.html">Scan to PDF Online</a></li><li><a href="annotate-pdf.html">Annotate PDF – Highlight &amp; Text</a></li><li><a href="pdf-to-text.html">PDF to Text Converter</a></li><li><a href="images-to-pdf.html">Images to PDF Converter</a></li><li><a href="merge-pdf.html">Merge PDF Files</a></li><li><a href="split-pdf.html">Split PDF – Extract Pages</a></li><li><a href="rotate-pdf.html">Rotate PDF Pages</a></li><li><a href="protect-pdf-with-password.html">Protect PDF with Password</a></li><li><a href="unlock-pdf.html">Unlock PDF</a></li><li><a href="word-to-pdf.html">Word to PDF Converter</a></li><li><a href="pdf-to-jpg.html">PDF to JPG Converter</a></li><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="sign-pdf.html">Sign PDF Online</a></li><li><a href="document-scanner-auto-crop.html">Document Scanner with Auto Crop</a></li><li><a href="background-remover.html">Image Background Remover</a></li><li><a href="image-cropper.html">Image Cropper &amp; Circle Cutter</a></li><li><a href="video-trimmer.html">Video Trimmer – Cut Video Online</a></li><li><a href="video-compressor.html">Video Compressor</a></li><li><a href="qr-code-generator.html">QR Code Generator</a></li><li><a href="passport-photo-maker.html">Passport Size Photo Maker</a></li><li><a href="heic-to-jpg.html">HEIC to JPG Converter</a></li><li><a href="image-compressor-converter.html">Image Compressor &amp; Converter</a></li><li><a href="resize-image-add-watermark.html">Resize Image &amp; Add Watermark</a></li><li><a href="gif-maker.html">GIF Maker from Images</a></li><li><a href="audio-compressor.html">Audio Compressor (MP3)</a></li><li><a href="audio-converter.html">Audio Converter – MP3 / WAV</a></li><li><a href="json-csv-base64-converter.html">JSON, CSV, Base64 &amp; URL Converter</a></li><li><a href="unit-converter.html">Unit Converter</a></li><li><a href="meta-tag-generator.html">Meta Tag Generator</a></li><li><a href="url-slug-generator.html">URL Slug Generator</a></li><li><a href="word-counter-keyword-density.html">Word Counter &amp; Keyword Density</a></li><li><a href="sitemap-generator.html">Sitemap.xml Generator</a></li><li><a href="robots-txt-generator.html">Robots.txt Generator</a></li><li><a href="schema-markup-generator.html">Schema Markup Generator (JSON-LD)</a></li></ul></section><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kya Add Page Numbers to PDF free hai?", "acceptedAnswer": {"@type": "Answer", "text": "Haan, bilkul free hai. Sign-up ya account ki zaroorat nahi."}}, {"@type": "Question", "name": "Kya meri file ya text kisi server par upload hota hai?", "acceptedAnswer": {"@type": "Answer", "text": "Nahi. Saari processing aapke browser mein hoti hai, aapka data aapke device se bahar nahi jata."}}]}</script><footer><a href="about.html">About</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a><br>© ToolKaro. Sab tools free hain.</footer>
+
+<script>
+window.__open='pnum';window.claude={use:async()=>null};
+pdfjsLib.GlobalWorkerOptions.workerSrc='';
+const $=s=>document.querySelector(s);
+const filterOpt=`<label>Filter</label><select id="o1"><option value="magic">Magic (saaf document)</option><option value="orig">Original</option><option value="bw">Black &amp; White</option></select>`;
+const T={
+ scan:{i:'📷',n:'Scan to PDF',d:'Camera se photo lo ya images chuno, saaf document PDF banao.',acc:'image/*',multi:1,cam:1,opt:filterOpt,go:scan},
+ img2pdf:{i:'🖼',n:'Images to PDF',d:'Kai images ko ek PDF mein jodo.',acc:'image/*',multi:1,opt:filterOpt,go:scan},
+ merge:{i:'🧩',n:'Merge PDF',d:'Kai PDF files ko ek mein jodo. Order list ke hisab se hoga.',acc:'application/pdf',multi:1,go:merge},
+ split:{i:'✂️',n:'Split PDF',d:'Kuch pages alag nikalo, jaise 1-3,5.',acc:'application/pdf',opt:`<label>Pages (jaise 1-3,5)</label><input type="text" id="o1" value="1">`,go:split},
+ pdf2img:{i:'🎞',n:'PDF to JPG',d:'Har page ki JPG image banao (zip mein).',acc:'application/pdf',opt:`<label>Quality</label><select id="o1"><option value="2">High</option><option value="1.4" selected>Medium</option></select>`,go:pdf2img},
+ compress:{i:'🗜',n:'Compress PDF',d:'PDF ka size chhota karo (pages images ban jate hain, text select nahi hoga).',acc:'application/pdf',opt:`<label>Compression</label><select id="o1"><option value="0.5">Strong</option><option value="0.7" selected>Balanced</option><option value="0.85">Light</option></select>`,go:compress}
+};
+let cur=null,files=[];
+const home=$('#home');
+T.acomp={i:'🔉',n:'Audio Compressor',d:'Audio ya video se awaaz nikal kar chhota MP3 banao. Output zip mein aayega.',acc:'audio/*,video/*',multi:1,opt:`<label>Quality</label><select id="o1"><option value="64">Chhota size (64 kbps)</option><option value="96" selected>Balanced (96 kbps)</option><option value="128">Acchi quality (128 kbps)</option></select><label>Channels</label><select id="o2"><option value="1" selected>Mono (sabse chhota)</option><option value="2">Stereo</option></select>`,go:()=>audioJob('c')};
+T.aconv={i:'🔁',n:'Audio Converter',d:'Audio ya video ko MP3 ya WAV mein badlo. Output zip mein aayega.',acc:'audio/*,video/*',multi:1,opt:`<label>Format</label><select id="o1"><option value="mp3">MP3</option><option value="wav">WAV</option></select>`,go:()=>audioJob('v')};
+T.imgc={i:'🗜',n:'Image Compress & Convert',d:'Image ka size chhota karo ya JPG/PNG/WebP mein badlo.',acc:'image/*',multi:1,opt:`<label>Format</label><select id="o1"><option value="jpeg">JPG</option><option value="webp">WebP</option><option value="png">PNG</option></select><label>Quality</label><select id="o2"><option value="0.6">Chhota size</option><option value="0.8" selected>Balanced</option><option value="0.92">Best</option></select><label>Max width</label><select id="o3"><option value="0">Original</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="800">800 px</option></select>`,go:imgJob};
+const U={'km→mi':x=>x*.621371,'mi→km':x=>x*1.609344,'kg→lb':x=>x*2.204623,'lb→kg':x=>x*.453592,'°C→°F':x=>x*9/5+32,'°F→°C':x=>(x-32)*5/9,'cm→inch':x=>x/2.54,'inch→cm':x=>x*2.54,'m→ft':x=>x*3.28084,'ft→m':x=>x*.3048,'L→gal':x=>x*.264172,'gal→L':x=>x*3.78541};
+const ex=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const X={
+ robots:{i:'🤖',n:'Robots.txt Generator',d:'Search engines aur AI bots ke liye robots.txt banao.',f:[{id:'ua',l:'User-agent',sel:[['*','Sab bots (*)'],['Googlebot','Googlebot'],['Bingbot','Bingbot']]},{id:'dis',l:'Disallow paths (har line mein ek)',ta:1,ph:'/admin/\n/private/'},{id:'al',l:'Allow paths (optional)',ta:1},{id:'sm',l:'Sitemap URL(s)',ta:1,ph:'https://example.com/sitemap.xml'},{id:'cd',l:'Crawl-delay (seconds, optional)'},{id:'ai',l:'AI training bots',sel:[['n','Allow'],['y','Block (GPTBot, CCBot, Google-Extended, ClaudeBot, PerplexityBot)']]}],run:v=>{const L=s=>s.split('\n').map(x=>x.trim()).filter(Boolean),o=['User-agent: '+v.ua];
+  L(v.al).forEach(p=>o.push('Allow: '+p));const d=L(v.dis);if(!d.length&&!L(v.al).length)o.push('Disallow:');d.forEach(p=>o.push('Disallow: '+p));if(v.cd.trim())o.push('Crawl-delay: '+v.cd.trim());
+  if(v.ai==='y')['GPTBot','ChatGPT-User','CCBot','Google-Extended','anthropic-ai','ClaudeBot','PerplexityBot'].forEach(b=>o.push('','User-agent: '+b,'Disallow: /'));
+  const sm=L(v.sm);if(sm.length){o.push('');sm.forEach(u=>o.push('Sitemap: '+u))}return o.join('\n')}},
+ schema:{i:'🧬',n:'Schema Markup (JSON-LD)',d:'Google rich results ke liye structured data banao.',f:[{id:'ty',l:'Type',sel:[['Article','Article / Blog post'],['FAQPage','FAQ'],['LocalBusiness','Local Business'],['Product','Product'],['Organization','Organization']]},{id:'n',l:'Name / Headline'},{id:'d',l:'Description',ta:1},{id:'u',l:'URL'},{id:'im',l:'Image / Logo URL'},{id:'x1',l:'Article: author | Business: phone | Product: brand'},{id:'x2',l:'Article: date (2026-11-21) | Business: address | Product: price,currency (499,PKR) | FAQ: har line "Sawal? | Jawab"',ta:1}],run:v=>{
+  const o={'@context':'https://schema.org','@type':v.ty};
+  if(v.ty==='FAQPage'){o.mainEntity=v.x2.split('\n').filter(l=>l.includes('|')).map(l=>{const [q,...a]=l.split('|');return{'@type':'Question',name:q.trim(),acceptedAnswer:{'@type':'Answer',text:a.join('|').trim()}}});if(!o.mainEntity.length)throw new Error('FAQ ke liye lines likho: Sawal? | Jawab')}
+  else{const set=(k,val)=>{if(val&&val.trim())o[k]=val.trim()};if(v.ty==='Article')set('headline',v.n);else set('name',v.n);set('description',v.d);set('url',v.u);set(v.ty==='Organization'?'logo':'image',v.im);
+   if(v.ty==='Article'){if(v.x1.trim())o.author={'@type':'Person',name:v.x1.trim()};set('datePublished',v.x2)}
+   if(v.ty==='LocalBusiness'){set('telephone',v.x1);if(v.x2.trim())o.address={'@type':'PostalAddress',streetAddress:v.x2.trim()}}
+   if(v.ty==='Product'){if(v.x1.trim())o.brand={'@type':'Brand',name:v.x1.trim()};const [pr,cu]=v.x2.split(',');if(pr&&pr.trim())o.offers={'@type':'Offer',price:pr.trim(),priceCurrency:(cu||'USD').trim(),availability:'https://schema.org/InStock'}}}
+  return '<script type="application/ld+json">\n'+JSON.stringify(o,null,2)+'\n<\/script>'}},
+ tconv:{i:'🔤',n:'Text Converter',d:'JSON ↔ CSV, Base64, URL encode/decode.',f:[{id:'m',l:'Type',sel:[['j2c','JSON → CSV'],['c2j','CSV → JSON'],['b64e','Base64 encode'],['b64d','Base64 decode'],['ue','URL encode'],['ud','URL decode']]},{id:'t',l:'Text',ta:1}],run:v=>{const t=v.t;
+  if(v.m==='b64e')return btoa(unescape(encodeURIComponent(t)));if(v.m==='b64d')return decodeURIComponent(escape(atob(t.trim())));
+  if(v.m==='ue')return encodeURIComponent(t);if(v.m==='ud')return decodeURIComponent(t);
+  if(v.m==='j2c'){let a=JSON.parse(t);if(!Array.isArray(a))a=[a];const k=[...new Set(a.flatMap(Object.keys))],q=s=>{s=s==null?'':typeof s==='object'?JSON.stringify(s):String(s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};return [k.map(q).join(','),...a.map(o=>k.map(c=>q(o[c])).join(','))].join('\n')}
+  const r=parseCSV(t),h=r[0]||[];return JSON.stringify(r.slice(1).map(x=>Object.fromEntries(h.map((c,i)=>[c,x[i]??'']))),null,2)}},
+ unit:{i:'📏',n:'Unit Converter',d:'Length, weight, temperature, volume.',f:[{id:'v',l:'Value',ph:'10'},{id:'u',l:'Convert',sel:Object.keys(U).map(k=>[k,k])}],run:v=>{const x=parseFloat(v.v);if(isNaN(x))throw new Error('Number likho');const [a,b]=v.u.split('→');return `${x} ${a} = ${+U[v.u](x).toFixed(4)} ${b}`}},
+ meta:{i:'🏷',n:'Meta Tag Generator',d:'Title, description aur social share (Open Graph) tags banao.',f:[{id:'title',l:'Page title (60 chars ke andar)'},{id:'desc',l:'Description (160 chars ke andar)',ta:1},{id:'kw',l:'Keywords (comma se)'},{id:'url',l:'Page URL',ph:'https://example.com/page'},{id:'img',l:'Share image URL',ph:'https://example.com/img.jpg'}],run:v=>{const o=[`<!-- Title ${v.title.length}/60, Description ${v.desc.length}/160 characters -->`,`<title>${ex(v.title)}</title>`,`<meta name="description" content="${ex(v.desc)}">`];
+  if(v.kw)o.push(`<meta name="keywords" content="${ex(v.kw)}">`);if(v.url)o.push(`<link rel="canonical" href="${ex(v.url)}">`,`<meta property="og:url" content="${ex(v.url)}">`);
+  o.push(`<meta property="og:type" content="website">`,`<meta property="og:title" content="${ex(v.title)}">`,`<meta property="og:description" content="${ex(v.desc)}">`);
+  if(v.img)o.push(`<meta property="og:image" content="${ex(v.img)}">`);o.push(`<meta name="twitter:card" content="${v.img?'summary_large_image':'summary'}">`);return o.join('\n')}},
+ slug:{i:'🔗',n:'URL Slug Generator',d:'Title ko SEO-friendly URL bana do (har line alag slug).',f:[{id:'t',l:'Title(s)',ta:1}],run:v=>v.t.split('\n').filter(s=>s.trim()).map(s=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')).join('\n')},
+ wc:{i:'🔎',n:'Word Count & Keywords',d:'Words, reading time aur top keywords (density).',f:[{id:'t',l:'Text',ta:1}],run:v=>{const w=(v.t.toLowerCase().match(/[\p{L}\p{N}']+/gu)||[]),n=w.length;if(!n)throw new Error('Text likho');
+  const sw=new Set('the and for are but not you with this that from have was they his her she him our out all can has had its who how what when where why will your into than then them these those been being were their there about which would could should'.split(' ')),m={};w.forEach(x=>{if(x.length>2&&!sw.has(x))m[x]=(m[x]||0)+1});
+  const top=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([k,c])=>`${k}: ${c} (${(c/n*100).toFixed(1)}%)`);
+  return `Words: ${n}\nCharacters: ${v.t.length}\nSentences: ${(v.t.match(/[.!?۔]+/g)||[]).length}\nReading time: ~${Math.max(1,Math.round(n/200))} min\n\nTop keywords:\n`+top.join('\n')}},
+ sitemap:{i:'🗺',n:'Sitemap Generator',d:'URLs ki list se sitemap.xml banao.',f:[{id:'t',l:'URLs (har line mein ek)',ta:1,ph:'https://example.com/\nhttps://example.com/about'}],run:v=>{const u=v.t.split('\n').map(s=>s.trim()).filter(Boolean);if(!u.length)throw new Error('URLs likho');const d=new Date().toISOString().slice(0,10);
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+u.map(x=>`  <url><loc>${ex(x)}</loc><lastmod>${d}</lastmod></url>`).join('\n')+'\n</urlset>'}}
+};
+T.gif={i:'🎞',n:'GIF Maker',d:'Kai images se animated GIF banao (order list ke hisab se).',acc:'image/*',multi:1,opt:`<label>Har frame kitni der</label><select id="o1"><option value="200">0.2 sec</option><option value="400">0.4 sec</option><option value="700" selected>0.7 sec</option><option value="1200">1.2 sec</option></select><label>Width</label><select id="o2"><option value="320">320 px</option><option value="480" selected>480 px</option><option value="640">640 px</option></select>`,go:gifJob};
+T.imgrs={i:'📐',n:'Resize + Watermark',d:'Image ka size badlo aur chahe to text watermark lagao.',acc:'image/*',multi:1,opt:`<label>Max width</label><select id="o1"><option value="0">Original</option><option value="1920">1920 px</option><option value="1080" selected>1080 px</option><option value="800">800 px</option><option value="512">512 px</option></select><label>Format</label><select id="o2"><option value="jpeg">JPG</option><option value="png">PNG</option><option value="webp">WebP</option></select><label>Quality</label><select id="o3"><option value="0.7">Chhota</option><option value="0.85" selected>Balanced</option><option value="0.95">Best</option></select><label>Watermark text (khali = nahi)</label><input type="text" id="o4" placeholder="@codetovideo"><label>Jagah</label><select id="o5"><option value="br">Neeche right</option><option value="bl">Neeche left</option><option value="tr">Upar right</option><option value="tl">Upar left</option><option value="c">Beech mein</option><option value="t">Poori image par (tile)</option></select><label>Opacity</label><select id="o6"><option value="0.35">Halka</option><option value="0.6" selected>Medium</option><option value="0.9">Gehra</option></select><label>Watermark size</label><select id="o7"><option value="0.03">Chhota</option><option value="0.05" selected>Medium</option><option value="0.08">Bada</option></select>`,go:imgWm};
+T.rotate={i:'🔄',n:'Rotate PDF Pages',d:'PDF ke pages ghumao (sab ya kuch).',acc:'application/pdf',opt:`<label>Angle</label><select id="o1"><option value="90">90° right</option><option value="180">180°</option><option value="270">90° left</option></select><label>Pages (khali = sab, ya jaise 1-3,5)</label><input type="text" id="o2">`,go:rotatePdf};
+T.docx2pdf={i:'📝',n:'Word to PDF',d:'.docx file ko PDF banao. Simple documents par best chalta hai; text image ki tarah save hota hai.',acc:'.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document',go:docxPdf};
+T.pnum={i:'🔢',n:'Page Numbers',d:'PDF ke har page par number lagao.',acc:'application/pdf',opt:`<label>Jagah</label><select id="o1"><option value="bc">Neeche beech</option><option value="br">Neeche right</option><option value="bl">Neeche left</option><option value="tc">Upar beech</option><option value="tr">Upar right</option><option value="tl">Upar left</option></select><label>Format</label><select id="o2"><option value="n">1</option><option value="nn">1 / 10</option><option value="p">Page 1</option><option value="pp">Page 1 of 10</option></select><label>Shuru number</label><input type="text" id="o3" value="1"><label>Font size</label><select id="o4"><option value="9">Chhota</option><option value="11" selected>Medium</option><option value="14">Bada</option></select><label>Pehla page (cover)</label><select id="o5"><option value="0">Number lagao</option><option value="1">Skip karo</option></select>`,go:pageNums};
+T.protect={i:'🔒',n:'Protect PDF (Password)',d:'PDF par password lagao. Pages images ban jate hain, text select nahi hoga.',acc:'application/pdf',opt:`<label>Password</label><input type="text" id="o1" placeholder="password likho">`,go:protectPdf};
+T.unlock={i:'🔓',n:'Unlock PDF',d:'Password wali PDF ka password hatao (aapko password pata hona chahiye). Output mein text select nahi hoga.',acc:'application/pdf',opt:`<label>Password (agar zaroori ho)</label><input type="text" id="o1">`,go:unlockPdf};
+T.heic={i:'📱',n:'HEIC to JPG',d:'iPhone ki HEIC photos ko JPG mein badlo.',acc:'.heic,.heif,image/heic,image/heif',multi:1,go:heicJob};
+const E={passport:{i:'🪪',n:'Passport Photo Maker',d:'Photo ko passport size mein kaato, background badlo aur print sheet banao.',run:passTool},annot:{i:'🖍',n:'Annotate PDF',d:'PDF par highlight, safed patti (whiteout) aur text lagao.',run:annotTool},pdftext:{i:'📃',n:'PDF to Text',d:'Text wali PDF se text nikalo aur copy karo.',run:pdfText},ocr:{i:'🔠',n:'Image to Text (OCR)',d:'Image ya photo se text nikalo, phir select/copy karo. English, Urdu, Hindi sab chalta hai.',run:ocrTool},sign:{i:'✍️',n:'Sign PDF',d:'PDF mein apni signature draw karke kisi bhi page par lagao.',run:signTool},scanpro:{i:'📸',n:'Scanner Pro (Auto Edge)',d:'Photo lo, document ke corners khud pakadta hai aur seedha kar deta hai. Kai pages ka PDF bana sakte ho.',run:scanPro},
+ vcomp:{i:'🗜',n:'Video Compressor',d:'Video ka size chhota karo (resolution aur bitrate kam karke).',run:vidCompress},
+ qr:{i:'▦',n:'QR Code Generator',d:'Link ya text se QR code banao, rang ke saath.',run:qrTool},
+ bgrm:{i:'🪄',n:'Background Remover',d:'Image ka background hatao (rang ke hisab se) aur brush se saaf karo. PNG transparent milegi.',run:bgRemover},
+ clip:{i:'✂️',n:'Image Clipper',d:'Crop, rotate, flip, ya circle shape mein kaato.',run:imgClipper},
+ vclip:{i:'🎬',n:'Video Clipper',d:'Video ka koi bhi hissa kaat kar alag clip banao.',run:vidClipper}};
+const CATS=[['🪄 Editors',['sign','scanpro','bgrm','clip','vclip','vcomp','qr']],['📄 PDF',['scan','annot','pdftext','img2pdf','merge','split','rotate','pnum','protect','unlock','docx2pdf','pdf2img','compress']],['🎧 Audio',['acomp','aconv']],['🖼 Image',['passport','heic','imgc','imgrs','gif']],['🔁 Converters',['tconv','unit']],['🔍 SEO',['meta','slug','wc','sitemap','robots','schema']]];
+CATS.forEach(([h,ks])=>{const t=document.createElement('h3');t.textContent=h;const g=document.createElement('div');g.className='grid';
+ ks.forEach(k=>{const a=T[k]||X[k]||E[k],b=document.createElement('button');b.className='card';b.innerHTML=`<b>${a.i}</b><span>${a.n}</span>`;b.onclick=()=>T[k]?open(k):X[k]?openX(k):openE(k);g.append(b)});home.append(t,g)});
+function open(k){cur=k;files=[];const t=T[k];$('#home').style.display='none';$('#tool').classList.add('on');
+ $('#tt').textContent=t.n;$('#td').textContent=t.d;$('#opts').innerHTML=t.opt||'';
+ $('#drop').innerHTML=t.cam?'📷 Camera ya gallery se chuno':'+ File chuno';$('#st').textContent='';list()}
+$('#back').onclick=()=>{$('#tool').classList.remove('on');$('#home').style.display=''};
+$('#drop').onclick=()=>{const t=T[cur],f=t.cam?$('#cam'):$('#fi');f.accept=t.acc;f.multiple=!!t.multi;f.click()};
+$('#cam').onchange=$('#fi').onchange=e=>{const a=[...e.target.files];files=T[cur].multi?files.concat(a):a.slice(0,1);e.target.value='';list()};
+function list(){const l=$('#fl');l.innerHTML='';files.forEach((f,i)=>{const d=document.createElement('div');d.className='f';
+ d.innerHTML=`<span>${i+1}. ${f.name.replace(/[<&]/g,'')}</span>`;
+ const mk=(t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=fn;d.append(b)};
+ if(T[cur].multi&&files.length>1){mk('↑',()=>{if(i){[files[i],files[i-1]]=[files[i-1],files[i]];list()}});mk('↓',()=>{if(i<files.length-1){[files[i],files[i+1]]=[files[i+1],files[i]];list()}})}
+ mk('✕',()=>{files.splice(i,1);list()});l.append(d)});
+ $('#run').disabled=!files.length;$('#run').textContent=files.length?'Start':'Pehle file chuno'}
+const msg=s=>{($('#etool').classList.contains('on')?$('#es'):$('#st')).textContent=s};
+$('#run').onclick=async()=>{$('#run').disabled=true;try{const r=await T[cur].go();if(r)await save(r)}catch(e){console.error(e);msg('Error: '+(e.message||e))}$('#run').disabled=!files.length};
+function save(r){const u=URL.createObjectURL(r.blob),a=document.createElement('a');a.href=u;a.download=r.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);msg('✅ Download shuru: '+r.name)}
+const buf=f=>f.arrayBuffer();
+let xc=null;
+/* ---------- GIF encoder ---------- */
+function lzw(px){const cur=[];let bits=0,nb=0,size=9,next=258,dict=new Map();
+ const emit=(c,s)=>{bits|=c<<nb;nb+=s;while(nb>=8){cur.push(bits&255);bits>>=8;nb-=8}};
+ emit(256,size);let p=px[0];
+ for(let i=1;i<px.length;i++){const c=px[i],k=p*256+c;if(dict.has(k))p=dict.get(k);else{emit(p,size);
+  if(next<4096){dict.set(k,next++);if(next>(1<<size)&&size<12)size++}else{emit(256,size);dict.clear();next=258;size=9}p=c}}
+ emit(p,size);emit(257,size);if(nb>0)cur.push(bits&255);return cur}
+function gifEncode(frames,w,h,delay){const o=[],u16=n=>o.push(n&255,n>>8&255);
+ [...'GIF89a'].forEach(c=>o.push(c.charCodeAt(0)));u16(w);u16(h);o.push(0xF7,0,0);
+ for(let i=0;i<256;i++){if(i<216)o.push(Math.floor(i/36)*51,Math.floor(i/6)%6*51,i%6*51);else o.push(0,0,0)}
+ o.push(0x21,0xFF,0x0B);[...'NETSCAPE2.0'].forEach(c=>o.push(c.charCodeAt(0)));o.push(3,1,0,0,0);
+ frames.forEach(f=>{o.push(0x21,0xF9,4,0);u16(Math.round(delay/10));o.push(0,0,0x2C);u16(0);u16(0);u16(w);u16(h);o.push(0,8);
+  const d=lzw(f);for(let i=0;i<d.length;i+=255){const ch=d.slice(i,i+255);o.push(ch.length);ch.forEach(b=>o.push(b))}o.push(0)});
+ o.push(0x3B);return new Blob([new Uint8Array(o)],{type:'image/gif'})}
+async function gifJob(){const W=+$('#o2').value,delay=+$('#o1').value,bms=[];
+ for(const f of files)bms.push(await createImageBitmap(f));
+ const H=Math.round(W*bms[0].height/bms[0].width),frames=[],c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d',{willReadFrequently:true});
+ bms.forEach((bm,n)=>{msg(`Frame ${n+1}/${bms.length}\u2026`);x.fillStyle='#fff';x.fillRect(0,0,W,H);const k=Math.min(W/bm.width,H/bm.height);
+  x.drawImage(bm,(W-bm.width*k)/2,(H-bm.height*k)/2,bm.width*k,bm.height*k);const a=x.getImageData(0,0,W,H).data,px=new Uint8Array(W*H);
+  for(let i=0;i<px.length;i++){const p=i*4;px[i]=Math.round(a[p]/51)*36+Math.round(a[p+1]/51)*6+Math.round(a[p+2]/51)}frames.push(px)});
+ return{name:'animation.gif',blob:gifEncode(frames,W,H,delay)}}
+
+/* ---------- Image resize + watermark ---------- */
+async function imgWm(){const mw=+$('#o1').value,fmt=$('#o2').value,q=+$('#o3').value,wm=$('#o4').value.trim(),pos=$('#o5').value,op=+$('#o6').value,fz=+$('#o7').value,ext=fmt==='jpeg'?'jpg':fmt,out=[];
+ for(let i=0;i<files.length;i++){msg(`Image ${i+1}/${files.length}\u2026`);const bm=await createImageBitmap(files[i]),k=mw&&bm.width>mw?mw/bm.width:1,c=document.createElement('canvas');
+  c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);const x=c.getContext('2d');if(fmt==='jpeg'){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}x.drawImage(bm,0,0,c.width,c.height);
+  if(wm){const s=Math.round(c.width*fz),m=s;x.font=`bold ${s}px sans-serif`;x.globalAlpha=op;x.fillStyle='#fff';x.shadowColor='rgba(0,0,0,.7)';x.shadowBlur=s/5;x.textBaseline='middle';
+   if(pos==='t'){x.save();x.rotate(-Math.PI/6);const tw=x.measureText(wm).width+s*2;for(let yy=-c.width;yy<c.height+c.width;yy+=s*3)for(let xx=-c.width;xx<c.width*2;xx+=tw)x.fillText(wm,xx,yy);x.restore()}
+   else{const tw=x.measureText(wm).width;const px=pos==='c'?(c.width-tw)/2:pos[1]==='l'?m:c.width-tw-m,py=pos==='c'?c.height/2:pos[0]==='t'?m:c.height-m;x.fillText(wm,px,py)}}
+  out.push([files[i].name.replace(/\.[^.]+$/,'')+'.'+ext,await blobOf(c,'image/'+fmt,q)])}
+ if(out.length===1)return{name:out[0][0],blob:out[0][1]};const z=new JSZip();out.forEach(o=>z.file(o[0],o[1]));return{name:'images.zip',blob:await z.generateAsync({type:'blob'})}}
+
+/* ---------- PDF rotate + Word to PDF ---------- */
+async function rotatePdf(){const {PDFDocument,degrees}=PDFLib,d=await PDFDocument.load(await buf(files[0]),{ignoreEncryption:true}),N=d.getPageCount(),a=+$('#o1').value,r=$('#o2').value.trim(),sel=new Set();
+ if(!r)for(let i=0;i<N;i++)sel.add(i);else r.split(',').forEach(p=>{const m=p.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/);if(m)for(let i=+m[1];i<=+(m[2]||m[1]);i++)if(i>=1&&i<=N)sel.add(i-1)});
+ if(!sel.size)throw new Error('Sahi page range likho');d.getPages().forEach((p,i)=>{if(sel.has(i))p.setRotation(degrees((p.getRotation().angle+a)%360))});
+ return{name:'rotated.pdf',blob:new Blob([await d.save()],{type:'application/pdf'})}}
+async function docxPdf(){msg('Word file padh raha hoon\u2026');const {value}=await mammoth.convertToHtml({arrayBuffer:await buf(files[0])}),el=document.createElement('div');
+ el.style.cssText='position:absolute;left:-10000px;top:0;width:794px;background:#fff;color:#000;font:15px/1.55 Georgia,serif';
+ el.innerHTML='<style>table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 6px}img{max-width:100%}h1,h2,h3{font-family:sans-serif}</style>'+value;document.body.append(el);
+ try{const {jsPDF}=window.jspdf,doc=new jsPDF({unit:'pt',format:'a4'});msg('PDF ban rahi hai\u2026');
+  await new Promise(r=>doc.html(el,{callback:r,autoPaging:'text',x:0,y:0,width:523,windowWidth:794,margin:[40,36,40,36]}));return{name:files[0].name.replace(/\.[^.]+$/,'')+'.pdf',blob:doc.output('blob')}}finally{el.remove()}}
+
+/* ---------- QR code ---------- */
+function qrTool(){
+ $('#eb').innerHTML=`<label>Text ya link</label><textarea id="qt" rows="3" placeholder="https://example.com"></textarea>
+ <label>Size</label><select id="qs"><option value="512">512 px</option><option value="1024">1024 px</option></select>
+ <label>Error correction</label><select id="qe"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">Quartile</option><option value="H">High (logo ke liye)</option></select>
+ <div class="row"><label style="margin:0">Rang <input type="color" id="qf" value="#000000"></label><label style="margin:0">Background <input type="color" id="qb" value="#ffffff"></label></div>
+ <div class="ck" style="max-width:300px;margin:10px auto"><canvas id="qc" width="1" height="1"></canvas></div>`;
+ const draw=()=>{const t=$('#qt').value;if(!t)return false;const qr=qrcode(0,$('#qe').value);qr.addData(t);qr.make();const n=qr.getModuleCount(),S=+$('#qs').value,m=4,u=Math.floor(S/(n+2*m)),sz=u*(n+2*m),c=$('#qc');
+  c.width=c.height=sz;const x=c.getContext('2d');x.fillStyle=$('#qb').value;x.fillRect(0,0,sz,sz);x.fillStyle=$('#qf').value;
+  for(let r=0;r<n;r++)for(let q=0;q<n;q++)if(qr.isDark(r,q))x.fillRect((q+m)*u,(r+m)*u,u,u);return true};
+ ['qt','qs','qe','qf','qb'].forEach(id=>$('#'+id).oninput=()=>{try{draw()}catch(e){msg('Text bohat lamba hai, kam karo.')}});
+ const s=$('#esave');s.textContent='\u2b07 PNG save karo';s.style.display='block';
+ s.onclick=async()=>{try{if(!draw()){msg('Pehle text ya link likho.');return}save({name:'qr-code.png',blob:await blobOf($('#qc'),'image/png')})}catch(e){msg('Error: '+e.message)}}}
+
+/* ---------- Video compressor ---------- */
+function vidCompress(){
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ Video chuno</div><div id="vw" style="display:none"><video id="vv" controls playsinline style="width:100%;max-height:40vh;border-radius:12px;background:#000"></video>
+ <label>Resolution (height)</label><select id="vh"><option value="720">720p</option><option value="480" selected>480p</option><option value="360">360p</option></select>
+ <label>Quality</label><select id="vk"><option value="1500">Acchi (1500 kbps)</option><option value="800" selected>Balanced (800 kbps)</option><option value="400">Sabse chhota (400 kbps)</option></select>
+ <div class="sub" style="margin-top:8px">Video real-time mein dobara record hoti hai (10 min ki video = 10 min), isliye is page ko khula rakho. Output WebM.</div></div>`;
+ let file=null;
+ $('#d0').onclick=()=>pick('video/*',f=>{file=f;if(vurl)URL.revokeObjectURL(vurl);vurl=URL.createObjectURL(f);$('#d0').style.display='none';$('#vw').style.display='block';$('#vv').src=vurl;
+  const s=$('#esave');s.textContent='\ud83d\udddc Compress karo';s.style.display='block';
+  s.onclick=async()=>{const v=$('#vv');if(!v.captureStream){msg('Is browser mein support nahi. Chrome ya Firefox use karo.');return}
+   s.disabled=true;try{v.pause();v.currentTime=0;await new Promise(r=>{v.onseeked=r;setTimeout(r,500)});const H=+$('#vh').value,kb=+$('#vk').value,k=Math.min(1,H/v.videoHeight),
+    W=Math.round(v.videoWidth*k/2)*2,Hh=Math.round(v.videoHeight*k/2)*2,c=document.createElement('canvas');c.width=W;c.height=Hh;const x=c.getContext('2d'),vs=c.captureStream(30),at=v.captureStream().getAudioTracks();
+    const mt=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>MediaRecorder.isTypeSupported(t)),
+     rec=new MediaRecorder(new MediaStream([...vs.getVideoTracks(),...at]),{mimeType:mt,videoBitsPerSecond:kb*1000,audioBitsPerSecond:64000}),ch=[];
+    rec.ondataavailable=e=>{if(e.data.size)ch.push(e.data)};const done=new Promise(r=>rec.onstop=r);rec.start(1000);await v.play();
+    await new Promise(r=>{const t=setInterval(()=>{x.drawImage(v,0,0,W,Hh);msg(`Compress ho raha hai\u2026 ${Math.round(v.currentTime/v.duration*100)}%`);if(v.ended||v.currentTime>=v.duration-.05){clearInterval(t);r()}},33)});
+    v.pause();rec.stop();await done;const b=new Blob(ch,{type:'video/webm'});await save({name:'compressed.webm',blob:b});msg(`Size: ${(file.size/1048576).toFixed(1)} MB \u2192 ${(b.size/1048576).toFixed(1)} MB`)}catch(e){msg('Error: '+e.message)}s.disabled=false}})}
+
+/* ---------- Scanner Pro (auto edge detect + perspective) ---------- */
+function scanPro(){
+ const pages=[];let src=null,pts=[[.1,.1],[.9,.1],[.9,.9],[.1,.9]];
+ $('#eb').innerHTML=`<div class="drop" id="d0">\ud83d\udcf7 Photo lo ya gallery se chuno</div><div id="sw" style="display:none">
+ <div style="text-align:center"><div id="cbox" style="touch-action:none"><img id="sim"><svg id="ssv" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon id="spl" fill="rgba(31,111,235,.18)" stroke="#1f6feb" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div></div>
+ <div class="row"><button id="sad">\ud83d\udd0d Auto detect</button><select id="sfl" style="width:auto"><option value="magic">Magic</option><option value="orig">Original</option><option value="gray">Gray</option><option value="bw">B&amp;W</option></select></div>
+ <button class="pri" id="sadd">\u2795 Is page ko add karo</button></div><div class="sub" id="spc" style="margin-top:8px"></div>`;
+ const hs=[];
+ const place=()=>{$('#spl').setAttribute('points',pts.map(p=>p[0]*100+','+p[1]*100).join(' '));hs.forEach((h,i)=>{h.style.left=`calc(${pts[i][0]*100}% - 14px)`;h.style.top=`calc(${pts[i][1]*100}% - 14px)`})};
+ function init(){const box=$('#cbox');for(let i=0;i<4;i++){const h=document.createElement('div');h.className='hd';h.style.touchAction='none';box.append(h);hs.push(h);
+  h.onpointerdown=e=>{h.setPointerCapture(e.pointerId);h.dragging=true;e.preventDefault()};h.onpointerup=()=>h.dragging=false;
+  h.onpointermove=e=>{if(!h.dragging)return;const rc=$('#sim').getBoundingClientRect();pts[i]=[clamp01((e.clientX-rc.left)/rc.width),clamp01((e.clientY-rc.top)/rc.height)];place()}}}
+ function detect(){const sc=document.createElement('canvas'),k=300/Math.max(src.width,src.height),w=Math.round(src.width*k),h=Math.round(src.height*k);sc.width=w;sc.height=h;const x=sc.getContext('2d');x.drawImage(src,0,0,w,h);
+  const a=x.getImageData(0,0,w,h).data,g=new Uint8Array(w*h),hist=new Array(256).fill(0);for(let i=0;i<w*h;i++){g[i]=a[i*4]*.3+a[i*4+1]*.59+a[i*4+2]*.11;hist[g[i]|0]++}
+  let tot=w*h,sum=0;for(let i=0;i<256;i++)sum+=i*hist[i];let sb=0,wb=0,mx=0,th=128;for(let t=0;t<256;t++){wb+=hist[t];if(!wb)continue;const wf=tot-wb;if(!wf)break;sb+=t*hist[t];const mb=sb/wb,mf=(sum-sb)/wf,v=wb*wf*(mb-mf)*(mb-mf);if(v>mx){mx=v;th=t}}
+  let m=new Uint8Array(w*h),c=0;for(let i=0;i<w*h;i++){m[i]=g[i]>th?1:0;c+=m[i]}if(c>tot*.8)for(let i=0;i<w*h;i++)m[i]^=1;
+  const lab=new Int32Array(w*h);let best=0,bi=0,id=0;
+  for(let s=0;s<w*h;s++){if(!m[s]||lab[s])continue;id++;let n=0;const st=[s];lab[s]=id;while(st.length){const i=st.pop();n++;const px=i%w,py=(i/w)|0;
+   if(px>0&&m[i-1]&&!lab[i-1]){lab[i-1]=id;st.push(i-1)}if(px<w-1&&m[i+1]&&!lab[i+1]){lab[i+1]=id;st.push(i+1)}if(py>0&&m[i-w]&&!lab[i-w]){lab[i-w]=id;st.push(i-w)}if(py<h-1&&m[i+w]&&!lab[i+w]){lab[i+w]=id;st.push(i+w)}}
+   if(n>best){best=n;bi=id}}
+  if(best<tot*.12){pts=[[.08,.08],[.92,.08],[.92,.92],[.08,.92]];place();msg('Edges clear nahi mile, corners haath se drag karo.');return}
+  let tl=[1e9],br=[-1e9],tr=[-1e9],bl=[1e9];for(let i=0;i<w*h;i++){if(lab[i]!==bi)continue;const px=i%w,py=(i/w)|0,s=px+py,d=px-py;
+   if(s<tl[0])tl=[s,px,py];if(s>br[0])br=[s,px,py];if(d>tr[0])tr=[d,px,py];if(d<bl[0])bl=[d,px,py]}
+  pts=[tl,tr,br,bl].map(p=>[p[1]/w,p[2]/h]);place();msg('Corners mil gaye. Zarurat ho to drag karke theek karo.')}
+ function warp(){const sw=src.width,sh=src.height,P=pts.map(p=>[p[0]*sw,p[1]*sh]),d=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+  let w=Math.max(d(P[0],P[1]),d(P[3],P[2])),h=Math.max(d(P[0],P[3]),d(P[1],P[2])),k=Math.min(1,1600/Math.max(w,h));w=Math.max(2,Math.round(w*k));h=Math.max(2,Math.round(h*k));
+  const sd=src.getContext('2d').getImageData(0,0,sw,sh).data,o=document.createElement('canvas');o.width=w;o.height=h;const ox=o.getContext('2d'),od=ox.createImageData(w,h),r=od.data;
+  for(let y=0;y<h;y++){const v=y/(h-1);for(let xx=0;xx<w;xx++){const u=xx/(w-1),
+    sx=(1-v)*((1-u)*P[0][0]+u*P[1][0])+v*((1-u)*P[3][0]+u*P[2][0]),sy=(1-v)*((1-u)*P[0][1]+u*P[1][1])+v*((1-u)*P[3][1]+u*P[2][1]),
+    x0=Math.min(sw-2,Math.max(0,sx|0)),y0=Math.min(sh-2,Math.max(0,sy|0)),fx=Math.min(1,Math.max(0,sx-x0)),fy=Math.min(1,Math.max(0,sy-y0)),i=(y*w+xx)*4;
+    for(let c=0;c<3;c++){const p00=sd[(y0*sw+x0)*4+c],p10=sd[(y0*sw+x0+1)*4+c],p01=sd[((y0+1)*sw+x0)*4+c],p11=sd[((y0+1)*sw+x0+1)*4+c];
+     r[i+c]=p00*(1-fx)*(1-fy)+p10*fx*(1-fy)+p01*(1-fx)*fy+p11*fx*fy}r[i+3]=255}}
+  ox.putImageData(od,0,0);return filt(o,$('#sfl').value)}
+ const s=$('#esave');
+ $('#d0').onclick=()=>pick('image/*',async f=>{src=await loadCanvas(f,2000);$('#d0').style.display='none';$('#sw').style.display='block';if(!hs.length)init();
+  $('#sim').onload=()=>{pts=[[.1,.1],[.9,.1],[.9,.9],[.1,.9]];place();detect()};$('#sim').src=src.toDataURL('image/jpeg',.8)});
+ $('#sad').onclick=()=>detect();
+ const info=()=>{$('#spc').textContent=pages.length?`${pages.length} page ready. Naya page lene ke liye photo dobara chuno.`:'';s.style.display=pages.length?'block':'none'};
+ $('#sadd').onclick=()=>{pages.push(warp());info();$('#sw').style.display='none';$('#d0').style.display='block';$('#d0').textContent='\ud83d\udcf7 Agla page: photo chuno'};
+ s.textContent='\u2b07 PDF save karo';
+ s.onclick=()=>{const {jsPDF}=window.jspdf;let doc=null;pages.forEach(c=>{const land=c.width>c.height*1.15,o=land?'l':'p';if(!doc)doc=new jsPDF({unit:'mm',format:'a4',orientation:o});else doc.addPage('a4',o);
+  const pw=land?297:210,ph=land?210:297,m=6,k=Math.min((pw-2*m)/c.width,(ph-2*m)/c.height),w=c.width*k,h=c.height*k;doc.addImage(c.toDataURL('image/jpeg',.88),'JPEG',(pw-w)/2,(ph-h)/2,w,h)});
+  save({name:'scan.pdf',blob:doc.output('blob')})};
+ info()}
+/* ---------- Page numbers / protect / unlock ---------- */
+async function pageNums(){const {PDFDocument,StandardFonts,rgb}=PDFLib,d=await PDFDocument.load(await buf(files[0]),{ignoreEncryption:true}),f=await d.embedFont(StandardFonts.Helvetica),
+ pos=$('#o1').value,fm=$('#o2').value,st=+$('#o3').value||1,fs=+$('#o4').value,skip=$('#o5').value==='1',pgs=d.getPages(),N=pgs.length;
+ pgs.forEach((p,i)=>{if(skip&&i===0)return;const n=i+st-(skip?1:0),tot=N+st-1-(skip?1:0),
+  t=fm==='n'?`${n}`:fm==='nn'?`${n} / ${tot}`:fm==='p'?`Page ${n}`:`Page ${n} of ${tot}`,{width:w,height:h}=p.getSize(),tw=f.widthOfTextAtSize(t,fs),m=28,
+  x=pos[1]==='c'?(w-tw)/2:pos[1]==='l'?m:w-tw-m,y=pos[0]==='b'?m:h-m-fs;p.drawText(t,{x,y,size:fs,font:f,color:rgb(.2,.2,.2)})});
+ return{name:'numbered.pdf',blob:new Blob([await d.save()],{type:'application/pdf'})}}
+async function rebuildPdf(pw,enc){const {jsPDF}=window.jspdf;let doc=null;
+ await pdfToCanvases(files[0],2,async(c,n,vp)=>{const w=vp.width/2,h=vp.height/2,o=w>h?'l':'p',op={unit:'pt',format:[w,h],orientation:o};if(enc)op.encryption=enc;
+  if(!doc)doc=new jsPDF(op);else doc.addPage([w,h],o);doc.addImage(c.toDataURL('image/jpeg',.9),'JPEG',0,0,w,h)},pw);return doc}
+async function protectPdf(){const pw=$('#o1').value.trim();if(!pw)throw new Error('Password likho');
+ const doc=await rebuildPdf(undefined,{userPassword:pw,ownerPassword:pw+'#owner',userPermissions:['print']});return{name:'protected.pdf',blob:doc.output('blob')}}
+async function unlockPdf(){try{const doc=await rebuildPdf($('#o1').value||undefined);return{name:'unlocked.pdf',blob:doc.output('blob')}}
+ catch(e){if(e&&e.name==='PasswordException')throw new Error('Password galat hai ya zaroori hai.');throw e}}
+
+/* ---------- Sign PDF ---------- */
+function signTool(){
+ let file=null,pdf=null,sig=null,asp=.4,fx=.3,fy=.6,fw=.3;
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ PDF chuno</div><div id="sw" style="display:none">
+ <label>Page number</label><select id="spg"></select>
+ <div id="pv" style="position:relative;line-height:0;margin:10px auto;max-width:100%;touch-action:none"><canvas id="pc" style="width:100%;height:auto;border:1px solid var(--bd);background:#fff"></canvas><img id="sg" style="display:none;position:absolute;cursor:move;touch-action:none;outline:2px dashed var(--ac)"></div>
+ <label>Signature yahan draw karo</label><div class="ck" style="background:#fff"><canvas id="sp" width="600" height="220"></canvas></div>
+ <div class="row"><button id="scl">🧹 Clear</button><select id="scol" style="width:auto"><option value="#111111">Kala</option><option value="#1a3fb0">Neela</option></select><button id="suse" class="pri" style="width:auto">✓ Signature lagao</button></div>
+ <label>Signature size</label><input type="range" id="ssz" min="8" max="70" value="30">
+ <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="sall"> Sab pages par lagao</label></div>`;
+ const pv=()=>$('#pv').getBoundingClientRect(),hf=()=>{const r=pv();return fw*asp*r.width/r.height};
+ const place=()=>{const g=$('#sg');g.style.left=fx*100+'%';g.style.top=fy*100+'%';g.style.width=fw*100+'%';g.style.height='auto'};
+ async function render(n){const pg=await pdf.getPage(n),vp=pg.getViewport({scale:1.3}),c=$('#pc');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;if(sig)place()}
+ $('#d0').onclick=()=>pick('application/pdf',async f=>{file=f;pdf=await pdfjsLib.getDocument({data:new Uint8Array(await buf(f))}).promise;
+  $('#d0').style.display='none';$('#sw').style.display='block';$('#spg').innerHTML=Array.from({length:pdf.numPages},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+  $('#spg').value=pdf.numPages;await render(pdf.numPages)});
+ $('#spg').onchange=e=>render(+e.target.value);
+ const sp=$('#sp'),x=sp.getContext('2d');let dn=false;x.lineCap=x.lineJoin='round';x.lineWidth=5;
+ const pt=e=>{const r=sp.getBoundingClientRect();return[(e.clientX-r.left)*600/r.width,(e.clientY-r.top)*220/r.height]};
+ sp.style.touchAction='none';sp.onpointerdown=e=>{dn=true;sp.setPointerCapture(e.pointerId);x.strokeStyle=$('#scol').value;const[a,b]=pt(e);x.beginPath();x.moveTo(a,b);x.lineTo(a+.1,b);x.stroke()};
+ sp.onpointermove=e=>{if(!dn)return;const[a,b]=pt(e);x.lineTo(a,b);x.stroke()};sp.onpointerup=()=>dn=false;
+ $('#scl').onclick=()=>x.clearRect(0,0,600,220);
+ $('#suse').onclick=()=>{const d=x.getImageData(0,0,600,220),a=d.data;let x0=600,y0=220,x1=0,y1=0;
+  for(let i=0;i<a.length;i+=4)if(a[i+3]>20){const p=i/4,px=p%600,py=(p/600)|0;if(px<x0)x0=px;if(px>x1)x1=px;if(py<y0)y0=py;if(py>y1)y1=py}
+  if(x1<=x0){msg('Pehle signature draw karo.');return}const m=6,w=x1-x0+2*m,h=y1-y0+2*m,c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(sp,x0-m,y0-m,w,h,0,0,w,h);
+  sig=c.toDataURL('image/png');asp=h/w;const g=$('#sg');g.src=sig;g.style.display='block';fx=.3;fy=.6;place();msg('Signature ko drag karke sahi jagah rakho.')};
+ const g=$('#sg');let ox=0,oy=0,gd=false;
+ g.onpointerdown=e=>{gd=true;g.setPointerCapture(e.pointerId);const r=pv();ox=(e.clientX-r.left)/r.width-fx;oy=(e.clientY-r.top)/r.height-fy;e.preventDefault()};
+ g.onpointerup=()=>gd=false;
+ g.onpointermove=e=>{if(!gd)return;const r=pv();fx=Math.min(1-fw,Math.max(0,(e.clientX-r.left)/r.width-ox));fy=Math.min(1-hf(),Math.max(0,(e.clientY-r.top)/r.height-oy));place()};
+ $('#ssz').oninput=e=>{fw=e.target.value/100;fx=Math.min(fx,1-fw);fy=Math.min(fy,1-hf());place()};
+ const s=$('#esave');s.textContent='⬇ Signed PDF save karo';s.style.display='block';
+ s.onclick=async()=>{if(!sig){msg('Pehle signature banao aur lagao.');return}s.disabled=true;
+  try{const {PDFDocument}=PDFLib,d=await PDFDocument.load(await buf(file),{ignoreEncryption:true}),img=await d.embedPng(sig),pgs=d.getPages(),sel=+$('#spg').value-1;
+   (($('#sall').checked)?pgs:[pgs[sel]]).forEach(p=>{const{width:pw,height:ph}=p.getSize(),w=fw*pw,h=w*asp;p.drawImage(img,{x:fx*pw,y:ph-fy*ph-h,width:w,height:h})});
+   await save({name:'signed.pdf',blob:new Blob([await d.save()],{type:'application/pdf'})})}catch(e){msg('Error: '+e.message)}s.disabled=false}}
+/* ---------- Image to Text (OCR via Claude) ---------- */
+function ocrTool(){
+ let blob=null,ctl=null;
+ $('#eb').innerHTML=`<div class="drop" id="d0">📷 Image chuno ya photo lo</div><div id="ow" style="display:none">
+ <img id="oim" style="max-width:100%;max-height:34vh;border-radius:10px;display:block;margin:0 auto">
+ <label>Text ki zaban</label><select id="olg"><option value="auto">Auto (khud pehchane)</option><option value="English">English</option><option value="Urdu">Urdu (اردو)</option><option value="Hindi">Hindi (हिन्दी)</option><option value="Arabic">Arabic</option></select>
+ <button class="pri" id="ogo" style="margin-top:12px">🔍 Text nikalo</button>
+ <label>Result (yahan se select ya copy karo)</label><textarea id="oo" rows="9" dir="auto" placeholder="Nikla hua text yahan aayega"></textarea>
+ <div class="row"><button id="ocp">📋 Copy</button><button id="ost" style="display:none">⏹ Stop</button></div></div>`;
+ const s=$('#esave');
+ $('#d0').onclick=()=>pick('image/*',async f=>{const c=await loadCanvas(f,1800);blob=await blobOf(c,'image/jpeg',.9);$('#oim').src=URL.createObjectURL(blob);
+  $('#d0').textContent='📷 Doosri image chuno';$('#ow').style.display='block';$('#oo').value='';msg('')});
+ $('#ocp').onclick=async()=>{const o=$('#oo');o.select();try{await navigator.clipboard.writeText(o.value)}catch(e){document.execCommand('copy')}msg('Copy ho gaya ✅')};
+ $('#ost').onclick=()=>ctl&&ctl.abort();
+ $('#ogo').onclick=async()=>{if(!blob)return;let sample=null;try{sample=await claude.use('sample')}catch(e){}
+  if(!sample){msg('Is view mein AI text-reading available nahi.');return}
+  const lg=$('#olg').value;ctl=new AbortController();$('#ogo').disabled=true;$('#ost').style.display='';$('#oo').value='Padh raha hoon…';
+  try{const r=await sample(`Extract ALL the text visible in the attached image, exactly as written, in natural reading order. Keep line breaks and paragraphs. `+(lg==='auto'?'Detect the language yourself.':`The text is mainly ${lg}.`)+` Do not translate, summarize or add commentary. Output only the extracted text. If there is no text at all, output exactly: NO_TEXT_FOUND`,
+    {images:[blob],modelTier:'default',signal:ctl.signal,onText:({text})=>{$('#oo').value=text}});
+   const t=r.text.trim();$('#oo').value=t==='NO_TEXT_FOUND'?'':t;msg(t==='NO_TEXT_FOUND'?'Image mein koi text nahi mila.':'Ho gaya. Text select/copy kar lo.');
+   s.textContent='⬇ Text file save karo';s.style.display=t&&t!=='NO_TEXT_FOUND'?'block':'none';s.onclick=()=>save({name:'text.txt',blob:new Blob([$('#oo').value],{type:'text/plain'})})}
+  catch(e){const c=e&&e.code;msg(c==='not_granted'?'Aapne permission nahi di.':c==='rate_limited'?'Thodi der baad try karo.':c==='aborted'?'Rok diya.':'Error: '+((e&&e.message)||c));if(e&&e.text)$('#oo').value=e.text}
+  $('#ogo').disabled=false;$('#ost').style.display='none'}}
+/* ---------- PDF to Text (text layer + OCR for scanned pages) ---------- */
+function pdfText(){
+ let file=null,ctl=null;
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ PDF chuno</div><div id="pw" style="display:none">
+ <label>Tareeka</label><select id="pm"><option value="auto">Auto (text wali PDF)</option></select>
+ <label>Text ki zaban (OCR ke liye)</label><select id="plg"><option value="auto">Auto</option><option value="English">English</option><option value="Urdu">Urdu (اردو)</option><option value="Hindi">Hindi (हिन्दी)</option></select>
+ <label>Pages (khali = sab, ya jaise 1-3,5)</label><input type="text" id="pr">
+ <button class="pri" id="pgo" style="margin-top:12px">🔍 Text nikalo</button>
+ <label>Result</label><textarea id="po" rows="10" dir="auto"></textarea>
+ <div class="row"><button id="pcp">📋 Copy</button><button id="pst" style="display:none">⏹ Stop</button></div></div>`;
+ const s=$('#esave');
+ $('#d0').onclick=()=>pick('application/pdf',f=>{file=f;$('#d0').textContent='📄 '+f.name.replace(/[<&]/g,'');$('#pw').style.display='block'});
+ $('#pcp').onclick=async()=>{const o=$('#po');o.select();try{await navigator.clipboard.writeText(o.value)}catch(e){document.execCommand('copy')}msg('Copy ho gaya ✅')};
+ $('#pst').onclick=()=>ctl&&ctl.abort();
+ $('#pgo').onclick=async()=>{if(!file)return;ctl=new AbortController();$('#pgo').disabled=true;$('#pst').style.display='';s.style.display='none';$('#po').value='';
+  try{const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await buf(file))}).promise,N=pdf.numPages,rg=$('#pr').value.trim(),idx=[];
+   if(!rg)for(let i=1;i<=N;i++)idx.push(i);else rg.split(',').forEach(p=>{const m=p.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/);if(m)for(let i=+m[1];i<=+(m[2]||m[1]);i++)if(i>=1&&i<=N)idx.push(i)});
+   if(!idx.length)throw new Error('Sahi page range likho');let sample=null,ocr=0,out='';
+   for(let k=0;k<idx.length;k++){if(ctl.signal.aborted)break;const n=idx[k];msg(`Page ${n} (${k+1}/${idx.length})…`);const pg=await pdf.getPage(n);let t='';
+    if($('#pm').value==='auto'){const tc=await pg.getTextContent();let ly;for(const it of tc.items){const y=it.transform[5];if(ly!==undefined&&Math.abs(y-ly)>3)t+='\n';t+=it.str;ly=y}}
+    if(t.trim().length<20){
+     if(ocr>=12){t='[OCR limit: ek baar mein 12 pages tak. Baaki pages ke liye range alag likho.]'}
+     else{if(!sample){sample=await claude.use('sample');if(!sample)throw new Error('Ye PDF scanned lagti hai (isme text nahi hai). Scanned PDF se text nikalna is site par available nahi.')}
+      ocr++;const vp=pg.getViewport({scale:1.6}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+      const lg=$('#plg').value,b=await blobOf(c,'image/jpeg',.85);
+      const r=await sample(`Extract ALL the text visible in the attached page image, exactly as written, in natural reading order. Keep line breaks and paragraphs. `+(lg==='auto'?'Detect the language yourself.':`The text is mainly ${lg}.`)+` Do not translate, summarize or add commentary. Output only the extracted text. If there is no text, output nothing.`,{images:[b],modelTier:'default',signal:ctl.signal});
+      t=r.text.trim()}}
+    out+=(out?'\n\n':'')+`--- Page ${n} ---\n`+t.trim();$('#po').value=out}
+   msg(ctl.signal.aborted?'Rok diya.':'Ho gaya. Text select/copy kar lo.');
+   if(out){s.textContent='⬇ Text file save karo';s.style.display='block';s.onclick=()=>save({name:'pdf-text.txt',blob:new Blob([$('#po').value],{type:'text/plain'})})}}
+  catch(e){const c=e&&e.code;msg(c==='not_granted'?'Aapne permission nahi di.':c==='rate_limited'?'Thodi der baad try karo.':'Error: '+((e&&e.message)||c))}
+  $('#pgo').disabled=false;$('#pst').style.display='none'}}
+async function heicJob(){if(typeof heic2any==='undefined')throw new Error('HEIC library load nahi hui. Page reload karo.');const out=[];
+ for(let i=0;i<files.length;i++){msg(`Image ${i+1}/${files.length}…`);let r=await heic2any({blob:files[i],toType:'image/jpeg',quality:.9});if(Array.isArray(r))r=r[0];out.push([files[i].name.replace(/\.[^.]+$/,'')+'.jpg',r])}
+ if(out.length===1)return{name:out[0][0],blob:out[0][1]};const z=new JSZip();out.forEach(o=>z.file(o[0],o[1]));return{name:'photos.zip',blob:await z.generateAsync({type:'blob'})}}
+/* ---------- Passport photo maker ---------- */
+function passTool(){
+ let src=null,fx=.2,fy=.1,fw=.6;
+ $('#eb').innerHTML=`<div class="drop" id="d0">📷 Apni photo chuno (chehra saaf dikhe)</div><div id="pw" style="display:none">
+ <div style="text-align:center"><div id="pbox" style="position:relative;line-height:0;display:inline-block;max-width:100%;overflow:hidden;touch-action:none"><img id="pim" style="max-width:100%;max-height:48vh;display:block"><div class="cr" id="pcr" style="cursor:move"></div></div></div>
+ <div class="sub" style="margin-top:6px">Frame ko drag karke chehra beech mein rakho, slider se size badlo.</div>
+ <label>Photo size</label><select id="psz"><option value="35x45">35 × 45 mm (Pakistan, India, UK, EU)</option><option value="50.8x50.8">2 × 2 inch (USA)</option><option value="33x48">33 × 48 mm (China visa)</option></select>
+ <label>Frame size</label><input type="range" id="pfw" min="20" max="100" value="60">
+ <label>Background</label><select id="pbg"><option value="">Original</option><option value="#ffffff">White</option><option value="#3a7bd5">Blue</option><option value="#c62828">Red</option></select>
+ <label>Background tolerance (agar rang bacha rahe to badhao)</label><input type="range" id="ptl" min="20" max="110" value="45">
+ <label>Output</label><select id="pout"><option value="pdf-a4">Print sheet PDF (A4)</option><option value="pdf-46">Print sheet PDF (4×6 inch)</option><option value="jpg">Sirf ek photo (JPG)</option></select>
+ <label>Kitni copies (sheet ke liye)</label><select id="pcp"><option value="4">4</option><option value="6">6</option><option value="8">8</option><option value="12">12</option><option value="99" selected>Jitni fit ho</option></select></div>`;
+ const rt=()=>{const[a,b]=$('#psz').value.split('x').map(Number);return a/b};
+ const im=()=>$('#pim');
+ function limits(){const W=im().clientWidth,H=im().clientHeight,mx=Math.min(1,H*rt()/W);$('#pfw').max=Math.floor(mx*100);fw=Math.min(fw,mx);$('#pfw').value=Math.round(fw*100);
+  const bh=fw*W/rt()/H;fx=Math.min(Math.max(0,fx),1-fw);fy=Math.min(Math.max(0,fy),1-bh);return[W,H,bh]}
+ function place(){const[W,H,bh]=limits(),c=$('#pcr');c.style.left=fx*W+'px';c.style.top=fy*H+'px';c.style.width=fw*W+'px';c.style.height=bh*H+'px'}
+ $('#d0').onclick=()=>pick('image/*',async f=>{src=await loadCanvas(f,2400);$('#d0').style.display='none';$('#pw').style.display='block';
+  im().onload=()=>{fw=.6;fx=.2;fy=.1;place()};im().src=src.toDataURL('image/jpeg',.8);
+  const s=$('#esave');s.textContent='⬇ Photo / Sheet save karo';s.style.display='block';s.onclick=make});
+ $('#psz').onchange=place;$('#pfw').oninput=e=>{fw=e.target.value/100;place()};
+ let dn=false,ox=0,oy=0;const cr=()=>$('#pcr');
+ cr().onpointerdown=e=>{dn=true;cr().setPointerCapture(e.pointerId);const r=im().getBoundingClientRect();ox=(e.clientX-r.left)/r.width-fx;oy=(e.clientY-r.top)/r.height-fy;e.preventDefault()};
+ cr().onpointermove=e=>{if(!dn)return;const r=im().getBoundingClientRect();fx=(e.clientX-r.left)/r.width-ox;fy=(e.clientY-r.top)/r.height-oy;place()};
+ cr().onpointerup=()=>dn=false;
+ function bgFill(c,hex,tol){const x=c.getContext('2d'),w=c.width,h=c.height,d=x.getImageData(0,0,w,h),a=d.data;let r=0,g=0,b=0,n=0;
+  for(const[cx,cy]of[[0,0],[w-6,0],[0,h-6],[w-6,h-6]])for(let j=0;j<6;j++)for(let i=0;i<6;i++){const p=((cy+j)*w+cx+i)*4;r+=a[p];g+=a[p+1];b+=a[p+2];n++}r/=n;g/=n;b/=n;
+  const R=parseInt(hex.slice(1,3),16),G=parseInt(hex.slice(3,5),16),B=parseInt(hex.slice(5,7),16),t2=tol*tol,seen=new Uint8Array(w*h),st=[];
+  const near=i=>{const p=i*4,dr=a[p]-r,dg=a[p+1]-g,db=a[p+2]-b;return dr*dr+dg*dg+db*db<=t2},push=i=>{if(!seen[i]&&near(i)){seen[i]=1;st.push(i)}};
+  for(let i=0;i<w;i++){push(i);push((h-1)*w+i)}for(let j=0;j<h;j++){push(j*w);push(j*w+w-1)}
+  while(st.length){const i=st.pop(),px=i%w,py=(i/w)|0;if(px>0)push(i-1);if(px<w-1)push(i+1);if(py>0)push(i-w);if(py<h-1)push(i+w)}
+  for(let i=0;i<w*h;i++){const p=i*4;if(seen[i]){a[p]=R;a[p+1]=G;a[p+2]=B}else{const px=i%w,py=(i/w)|0;if((px>0&&seen[i-1])||(px<w-1&&seen[i+1])||(py>0&&seen[i-w])||(py<h-1&&seen[i+w])){a[p]=(a[p]+R)/2;a[p+1]=(a[p+1]+G)/2;a[p+2]=(a[p+2]+B)/2}}}
+  x.putImageData(d,0,0)}
+ async function make(){try{const[mw,mh]=$('#psz').value.split('x').map(Number),ow=Math.round(mw/25.4*300),oh=Math.round(mh/25.4*300),c=document.createElement('canvas');c.width=ow;c.height=oh;
+  const sw=fw*src.width;c.getContext('2d').drawImage(src,fx*src.width,fy*src.height,sw,sw/rt(),0,0,ow,oh);const bg=$('#pbg').value;if(bg)bgFill(c,bg,+$('#ptl').value);
+  const out=$('#pout').value;if(out==='jpg')return save({name:'passport-photo.jpg',blob:await blobOf(c,'image/jpeg',.95)});
+  const{jsPDF}=window.jspdf,A=out==='pdf-a4'?[210,297]:[101.6,152.4],m=5,gap=2;let best=null;
+  for(const[pw,ph]of out==='pdf-a4'?[A]:[A,[A[1],A[0]]]){const cols=Math.floor((pw-2*m+gap)/(mw+gap)),rows=Math.floor((ph-2*m+gap)/(mh+gap));if(!best||cols*rows>best.cols*best.rows)best={pw,ph,cols,rows}}
+  if(best.cols*best.rows<1){msg('Is paper par photo fit nahi hoti.');return}
+  const n=Math.min(+$('#pcp').value,best.cols*best.rows),cols=Math.min(best.cols,n),rows=Math.ceil(n/cols),gw=cols*mw+(cols-1)*gap,gh=rows*mh+(rows-1)*gap,x0=(best.pw-gw)/2,y0=m+ (out==='pdf-a4'?0:(best.ph-2*m-gh)/2),
+   doc=new jsPDF({unit:'mm',format:[best.pw,best.ph],orientation:best.pw>best.ph?'l':'p'}),img=c.toDataURL('image/jpeg',.95);
+  doc.setDrawColor(190);doc.setLineWidth(.1);for(let i=0;i<n;i++){const x=x0+(i%cols)*(mw+gap),y=y0+Math.floor(i/cols)*(mh+gap);doc.addImage(img,'JPEG',x,y,mw,mh);doc.rect(x,y,mw,mh)}
+  save({name:'passport-sheet.pdf',blob:doc.output('blob')})}catch(e){msg('Error: '+e.message)}}}
+
+/* ---------- Annotate PDF (highlight / whiteout / text) ---------- */
+function annotTool(){
+ let file=null,pdf=null,pg=1,mode='h',ann={},tmp=null;
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ PDF chuno</div><div id="aw" style="display:none">
+ <label>Page</label><select id="apg"></select>
+ <div class="row" id="am"><button data-m="h" class="on">🖍 Highlight</button><button data-m="w">⬜ Whiteout</button><button data-m="t">🔤 Text</button></div>
+ <div class="row"><input type="text" id="atx" placeholder="Text mode: pehle yahan likho, phir page par tap karo" style="flex:1;min-width:200px"><select id="asz" style="width:auto"><option value="0.016">Chhota</option><option value="0.022" selected>Medium</option><option value="0.032">Bada</option></select></div>
+ <div style="position:relative;line-height:0;touch-action:none"><canvas id="ac" style="width:100%;height:auto;border:1px solid var(--bd);background:#fff"></canvas><canvas id="ao" style="position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none"></canvas></div>
+ <div class="row"><button id="aun">↩ Undo</button></div>
+ <div class="sub">Whiteout sirf upar safed patti lagata hai, neeche ka text file mein rehta hai. Asli redaction ke liye ye use mat karo. Text sirf English/Latin letters mein.</div></div>`;
+ const ao=()=>$('#ao'),list=()=>ann[pg]||(ann[pg]=[]);
+ function draw(){const c=ao(),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);
+  [...list(),...(tmp?[tmp]:[])].forEach(a=>{if(a.t==='t'){x.fillStyle='#000';x.font=`${a.fs*H}px sans-serif`;x.textBaseline='top';x.fillText(a.s,a.x*W,a.y*H)}
+   else{x.fillStyle=a.t==='h'?'rgba(255,230,0,.4)':'#fff';x.fillRect(a.x*W,a.y*H,a.w*W,a.h*H);if(a.t==='w'){x.strokeStyle='#999';x.setLineDash([4,3]);x.strokeRect(a.x*W,a.y*H,a.w*W,a.h*H);x.setLineDash([])}}})}
+ async function render(){const p=await pdf.getPage(pg),vp=p.getViewport({scale:1.3}),c=$('#ac');c.width=ao().width=vp.width;c.height=ao().height=vp.height;await p.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;draw()}
+ $('#d0').onclick=()=>pick('application/pdf',async f=>{file=f;pdf=await pdfjsLib.getDocument({data:new Uint8Array(await buf(f))}).promise;$('#d0').style.display='none';$('#aw').style.display='block';
+  $('#apg').innerHTML=Array.from({length:pdf.numPages},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');await render();
+  const s=$('#esave');s.textContent='⬇ Annotated PDF save karo';s.style.display='block';s.onclick=saveIt});
+ $('#apg').onchange=e=>{pg=+e.target.value;render()};
+ $('#am').onclick=e=>{const m=e.target.dataset.m;if(!m)return;mode=m;[...$('#am').children].forEach(b=>b.classList.toggle('on',b===e.target))};
+ $('#aun').onclick=()=>{list().pop();draw()};
+ const pt=e=>{const r=ao().getBoundingClientRect();return[clamp01((e.clientX-r.left)/r.width),clamp01((e.clientY-r.top)/r.height)]};let st=null;
+ ao().onpointerdown=e=>{const[x,y]=pt(e);if(mode==='t'){const s=$('#atx').value;if(!s.trim()){msg('Pehle upar box mein text likho.');return}list().push({t:'t',x,y,s,fs:+$('#asz').value});draw();return}
+  st=[x,y];ao().setPointerCapture(e.pointerId)};
+ ao().onpointermove=e=>{if(!st)return;const[x,y]=pt(e);tmp={t:mode,x:Math.min(st[0],x),y:Math.min(st[1],y),w:Math.abs(x-st[0]),h:Math.abs(y-st[1])};draw()};
+ ao().onpointerup=()=>{if(tmp&&tmp.w>.005&&tmp.h>.003)list().push(tmp);tmp=null;st=null;draw()};
+ async function saveIt(){try{const{PDFDocument,StandardFonts,rgb}=PDFLib,d=await PDFDocument.load(await buf(file),{ignoreEncryption:true}),f=await d.embedFont(StandardFonts.Helvetica),pgs=d.getPages();
+  for(const k in ann){const p=pgs[k-1],{width:pw,height:ph}=p.getSize();ann[k].forEach(a=>{
+   if(a.t==='t'){const fs=a.fs*ph;p.drawText(a.s,{x:a.x*pw,y:ph-a.y*ph-fs*.85,size:fs,font:f,color:rgb(0,0,0)})}
+   else p.drawRectangle({x:a.x*pw,y:ph-(a.y+a.h)*ph,width:a.w*pw,height:a.h*ph,color:a.t==='h'?rgb(1,.9,0):rgb(1,1,1),opacity:a.t==='h'?.4:1,borderWidth:0})})}
+  await save({name:'annotated.pdf',blob:new Blob([await d.save()],{type:'application/pdf'})})}catch(e){msg('Error: '+e.message+' (text mein sirf English letters chalte hain)')}}}
+let vurl=null;
+
+
+
+
+
+function openE(k){$('#home').style.display='none';$('#etool').classList.add('on');$('#et').textContent=E[k].n;$('#ed').textContent=E[k].d;
+ $('#es').textContent='';$('#eb').innerHTML='';const s=$('#esave');s.style.display='none';s.onclick=null;s.disabled=false;E[k].run()}
+$('#eback').onclick=()=>{const v=$('#vv');if(v){v.pause()}if(vurl){URL.revokeObjectURL(vurl);vurl=null}$('#eb').innerHTML='';$('#etool').classList.remove('on');$('#home').style.display=''};
+function pick(acc,cb){const i=document.createElement('input');i.type='file';i.accept=acc;i.onchange=e=>{const f=e.target.files[0];if(f)cb(f)};i.click()}
+async function loadCanvas(f,max){const bm=await createImageBitmap(f),k=Math.min(1,max/Math.max(bm.width,bm.height)),c=document.createElement('canvas');
+ c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);return c}
+const blobOf=(c,t,q)=>new Promise(r=>c.toBlob(r,t,q));
+const clamp01=v=>Math.min(1,Math.max(0,v));
+
+/* ---------- Background remover ---------- */
+function bgRemover(){
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ Image chuno</div><div id="bw" style="display:none">
+ <div class="ck"><canvas id="bc"></canvas></div>
+ <div class="row" id="bm"><button data-m="tap" class="on">🎯 Rang chuno</button><button data-m="er">🧽 Mitao</button><button data-m="re">↩ Wapas lao</button></div>
+ <button class="pri" id="auto">✨ Auto remove background</button>
+ <label>Tolerance: <b id="tv">40</b></label><input type="range" id="tol" min="5" max="150" value="40">
+ <label>Brush size</label><input type="range" id="bs" min="5" max="80" value="25">
+ <div class="sub" style="margin-top:8px">Auto sab se behtar tab chalta hai jab background ek hi rang ka ho. Phir bache hue hisse ko Mitao brush se saaf karo.</div></div>`;
+ $('#d0').onclick=()=>pick('image/*',async f=>{const oc=await loadCanvas(f,1400),bc=$('#bc'),W=oc.width,H=oc.height;bc.width=W;bc.height=H;
+  const x=bc.getContext('2d',{willReadFrequently:true});x.drawImage(oc,0,0);$('#d0').style.display='none';$('#bw').style.display='block';
+  let mode='tap',down=false;
+  $('#bm').onclick=e=>{const m=e.target.dataset.m;if(!m)return;mode=m;[...$('#bm').children].forEach(b=>b.classList.toggle('on',b===e.target))};
+  $('#tol').oninput=e=>$('#tv').textContent=e.target.value;
+  const tol=()=>+$('#tol').value;
+  function flood(r,g,b,fromBorder){const d=x.getImageData(0,0,W,H),a=d.data,t2=tol()*tol(),seen=new Uint8Array(W*H),st=[];
+   const near=i=>{const p=i*4;if(a[p+3]===0)return false;const dr=a[p]-r,dg=a[p+1]-g,db=a[p+2]-b;return dr*dr+dg*dg+db*db<=t2};
+   const push=i=>{if(!seen[i]&&near(i)){seen[i]=1;st.push(i)}};
+   for(let i=0;i<W;i++){push(i);push((H-1)*W+i)}for(let j=0;j<H;j++){push(j*W);push(j*W+W-1)}
+   while(st.length){const i=st.pop(),px=i%W,py=(i/W)|0;if(px>0)push(i-1);if(px<W-1)push(i+1);if(py>0)push(i-W);if(py<H-1)push(i+W)}
+   for(let i=0;i<W*H;i++)if(seen[i])a[i*4+3]=0;
+   for(let i=0;i<W*H;i++){if(seen[i]||a[i*4+3]===0)continue;const px=i%W,py=(i/W)|0;
+    if((px>0&&seen[i-1])||(px<W-1&&seen[i+1])||(py>0&&seen[i-W])||(py<H-1&&seen[i+W]))a[i*4+3]=150}
+   x.putImageData(d,0,0)}
+  $('#auto').onclick=()=>{const d=x.getImageData(0,0,W,H).data;let r=0,g=0,b=0;[[0,0],[W-1,0],[0,H-1],[W-1,H-1]].forEach(([px,py])=>{const i=(py*W+px)*4;r+=d[i];g+=d[i+1];b+=d[i+2]});flood(r/4,g/4,b/4)};
+  function xy(e){const rc=bc.getBoundingClientRect();return[(e.clientX-rc.left)*W/rc.width,(e.clientY-rc.top)*H/rc.height,W/rc.width]}
+  function brush(e){const[px,py,s]=xy(e),r=+$('#bs').value*s/2;x.save();x.beginPath();x.arc(px,py,r,0,7);
+   if(mode==='er'){x.globalCompositeOperation='destination-out';x.fill()}else{x.clip();x.clearRect(0,0,W,H);x.drawImage(oc,0,0)}x.restore()}
+  bc.onpointerdown=e=>{const[px,py]=xy(e);if(mode==='tap'){const p=x.getImageData(px|0,py|0,1,1).data;
+    const d=x.getImageData(0,0,W,H),a=d.data,t2=tol()*tol();for(let i=0;i<a.length;i+=4){const dr=a[i]-p[0],dg=a[i+1]-p[1],db=a[i+2]-p[2];if(dr*dr+dg*dg+db*db<=t2)a[i+3]=0}x.putImageData(d,0,0)}
+   else{down=true;bc.setPointerCapture(e.pointerId);brush(e)}};
+  bc.onpointermove=e=>{if(down)brush(e)};bc.onpointerup=()=>down=false;
+  const s=$('#esave');s.textContent='⬇ PNG save karo';s.style.display='block';
+  s.onclick=async()=>save({name:'no-background.png',blob:await blobOf(bc,'image/png')})})}
+
+/* ---------- Image clipper ---------- */
+function imgClipper(){
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ Image chuno</div><div id="cw" style="display:none">
+ <div style="text-align:center"><div id="cbox"><img id="cim"><div class="cr" id="cr"><div class="hd" data-c="tl"></div><div class="hd" data-c="tr"></div><div class="hd" data-c="bl"></div><div class="hd" data-c="br"></div></div></div></div>
+ <div class="row" id="rt"><button data-r="0" class="on">Free</button><button data-r="1">1:1</button><button data-r="0.8">4:5</button><button data-r="0.5625">9:16</button><button data-r="1.7778">16:9</button></div>
+ <div class="row"><button id="rot">⟳ Rotate</button><button id="flp">⇋ Flip</button></div>
+ <label>Shape</label><select id="csh"><option value="r">Rectangle</option><option value="c">Circle / Oval (transparent PNG)</option></select>
+ <label>Format</label><select id="cfm"><option value="png">PNG</option><option value="jpeg">JPG</option><option value="webp">WebP</option></select></div>`;
+ $('#d0').onclick=()=>pick('image/*',async f=>{const src=await loadCanvas(f,2400);let rot=0,flip=false,lock=0,box={x:.05,y:.05,w:.9,h:.9};
+  $('#d0').style.display='none';$('#cw').style.display='block';
+  const tr=()=>{const q=rot%2,c=document.createElement('canvas');c.width=q?src.height:src.width;c.height=q?src.width:src.height;const x=c.getContext('2d');
+   x.translate(c.width/2,c.height/2);x.rotate(rot*Math.PI/2);if(flip)x.scale(-1,1);x.drawImage(src,-src.width/2,-src.height/2);return c};
+  const im=$('#cim'),cr=$('#cr');
+  function place(){const W=im.clientWidth,H=im.clientHeight;cr.style.left=box.x*W+'px';cr.style.top=box.y*H+'px';cr.style.width=box.w*W+'px';cr.style.height=box.h*H+'px';
+   const hs={tl:[0,0],tr:[1,0],bl:[0,1],br:[1,1]};cr.querySelectorAll('.hd').forEach(h=>{const[a,b]=hs[h.dataset.c];h.style.left=`calc(${a*100}% - 14px)`;h.style.top=`calc(${b*100}% - 14px)`})}
+  function setRatio(rt){lock=rt;const W=im.clientWidth,H=im.clientHeight;if(!rt){box={x:.05,y:.05,w:.9,h:.9}}else{let bh=H*.9,bw=bh*rt;if(bw>W*.9){bw=W*.9;bh=bw/rt}box={x:(1-bw/W)/2,y:(1-bh/H)/2,w:bw/W,h:bh/H}}place()}
+  const show=()=>{im.onload=()=>setRatio(lock);im.src=tr().toDataURL('image/jpeg',.8)};show();
+  $('#rt').onclick=e=>{const r=e.target.dataset.r;if(r===undefined)return;[...$('#rt').children].forEach(b=>b.classList.toggle('on',b===e.target));setRatio(+r)};
+  $('#rot').onclick=()=>{rot=(rot+1)%4;show()};$('#flp').onclick=()=>{flip=!flip;show()};
+  $('#csh').onchange=e=>{if(e.target.value==='c'){[...$('#rt').children].forEach((b,i)=>b.classList.toggle('on',i===1));setRatio(1);$('#cfm').value='png'}};
+  let drag=null;
+  cr.onpointerdown=e=>{const h=e.target.closest('.hd');if(!h)return;drag=h.dataset.c;h.setPointerCapture(e.pointerId);e.preventDefault()};
+  cr.onpointerup=()=>drag=null;
+  cr.onpointermove=e=>{if(!drag)return;const rc=im.getBoundingClientRect(),W=rc.width,H=rc.height;
+   const px=clamp01((e.clientX-rc.left)/W),py=clamp01((e.clientY-rc.top)/H),l=box.x,t=box.y,r=l+box.w,b=t+box.h,
+    ox=drag[1]==='l'?r:l,oy=drag[0]==='t'?b:t;let nx=px,ny=py;
+   if(lock){const sx=nx>=ox?1:-1,sy=ny>=oy?1:-1;let w=Math.max(Math.abs(nx-ox)*W,Math.abs(ny-oy)*H*lock);
+    w=Math.min(w,(sx>0?(1-ox)*W:ox*W),(sy>0?(1-oy)*H:oy*H)*lock);nx=ox+sx*w/W;ny=oy+sy*(w/lock)/H}
+   if(Math.abs(nx-ox)<.05||Math.abs(ny-oy)<.05)return;
+   box={x:Math.min(ox,nx),y:Math.min(oy,ny),w:Math.abs(nx-ox),h:Math.abs(ny-oy)};place()};
+  const s=$('#esave');s.textContent='⬇ Clip save karo';s.style.display='block';
+  s.onclick=async()=>{const r=tr(),fm=$('#cfm').value,c=document.createElement('canvas'),sx=box.x*r.width,sy=box.y*r.height,sw=box.w*r.width,sh=box.h*r.height;
+   c.width=Math.round(sw);c.height=Math.round(sh);const x=c.getContext('2d');if(fm==='jpeg'){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}
+   if($('#csh').value==='c'){x.beginPath();x.ellipse(c.width/2,c.height/2,c.width/2,c.height/2,0,0,7);x.clip()}
+   x.drawImage(r,sx,sy,sw,sh,0,0,c.width,c.height);const ex=fm==='jpeg'?'jpg':fm;
+   save({name:'clip.'+ex,blob:await blobOf(c,'image/'+fm,.92)})}})}
+
+/* ---------- Video clipper ---------- */
+function vidClipper(){
+ $('#eb').innerHTML=`<div class="drop" id="d0">+ Video chuno</div><div id="vw" style="display:none">
+ <video id="vv" controls playsinline style="width:100%;max-height:50vh;border-radius:12px;background:#000"></video>
+ <label>Start: <b id="vs">0.0</b> s</label><input type="range" id="v1" min="0" step="0.1" value="0">
+ <label>End: <b id="ve">0.0</b> s</label><input type="range" id="v2" min="0" step="0.1" value="0">
+ <div class="row"><button id="vb1">⏱ Start = abhi ka time</button><button id="vb2">⏱ End = abhi ka time</button></div>
+ <div class="sub">Clip real-time mein record hota hai (10 sec ka clip = 10 sec lagenge) aur WebM file banti hai. Record ke dauraan awaaz chalegi.</div></div>`;
+ $('#d0').onclick=()=>pick('video/*',f=>{if(vurl)URL.revokeObjectURL(vurl);vurl=URL.createObjectURL(f);const v=$('#vv'),a=$('#v1'),b=$('#v2');
+  $('#d0').style.display='none';$('#vw').style.display='block';v.src=vurl;
+  const upd=()=>{$('#vs').textContent=(+a.value).toFixed(1);$('#ve').textContent=(+b.value).toFixed(1)};
+  v.onloadedmetadata=()=>{const d=v.duration;a.max=b.max=d;a.value=0;b.value=d;upd()};
+  a.oninput=()=>{if(+a.value>+b.value-.2)a.value=+b.value-.2;if(+a.value<0)a.value=0;v.currentTime=+a.value;upd()};
+  b.oninput=()=>{if(+b.value<+a.value+.2)b.value=+a.value+.2;v.currentTime=+b.value;upd()};
+  $('#vb1').onclick=()=>{a.value=Math.min(v.currentTime,+b.value-.2);upd()};$('#vb2').onclick=()=>{b.value=Math.max(v.currentTime,+a.value+.2);upd()};
+  const s=$('#esave');s.textContent='✂️ Clip banao';s.style.display='block';
+  s.onclick=async()=>{if(!v.captureStream){msg('Is browser mein support nahi. Chrome ya Firefox use karo.');return}
+   s.disabled=true;const st=+a.value,en=+b.value;try{v.pause();v.currentTime=st;await new Promise(r=>{v.onseeked=r});
+    const mt=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>MediaRecorder.isTypeSupported(t)),rec=new MediaRecorder(v.captureStream(),{mimeType:mt}),ch=[];
+    rec.ondataavailable=ev=>{if(ev.data.size)ch.push(ev.data)};const done=new Promise(r=>rec.onstop=r);rec.start(500);await v.play();
+    await new Promise(r=>{const t=setInterval(()=>{msg(`Record ho raha hai… ${Math.max(0,v.currentTime-st).toFixed(1)} / ${(en-st).toFixed(1)} s`);if(v.currentTime>=en||v.ended){clearInterval(t);r()}},100)});
+    v.pause();rec.stop();await done;await save({name:'clip.webm',blob:new Blob(ch,{type:'video/webm'})})}catch(e){msg('Error: '+e.message)}s.disabled=false}})}
+
+function openX(k){xc=X[k];$('#home').style.display='none';$('#xtool').classList.add('on');$('#xt').textContent=xc.n;$('#xd').textContent=xc.d;$('#xo').value='';$('#xs').textContent='';
+ $('#xf').innerHTML=xc.f.map(f=>`<label>${f.l}</label>`+(f.sel?`<select id="x_${f.id}">${f.sel.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join('')}</select>`:f.ta?`<textarea id="x_${f.id}" rows="6" placeholder="${f.ph||''}"></textarea>`:`<input type="text" id="x_${f.id}" placeholder="${f.ph||''}">`)).join('')}
+$('#xrun').onclick=()=>{const v={};xc.f.forEach(f=>v[f.id]=$('#x_'+f.id).value);try{$('#xo').value=xc.run(v);$('#xs').textContent=''}catch(e){$('#xo').value='';$('#xs').textContent='Error: '+e.message}};
+$('#xcp').onclick=async()=>{const o=$('#xo');o.select();try{await navigator.clipboard.writeText(o.value)}catch(e){document.execCommand('copy')}$('#xs').textContent='Copy ho gaya ✅'};
+$('#xback').onclick=()=>{$('#xtool').classList.remove('on');$('#home').style.display=''};
+function parseCSV(t){const r=[];let row=[],c='',q=0;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h=='"'){if(t[i+1]=='"'){c+='"';i++}else q=0}else c+=h}else if(h=='"')q=1;else if(h==','){row.push(c);c=''}else if(h=='\n'||h=='\r'){if(h=='\r'&&t[i+1]=='\n')i++;row.push(c);r.push(row);row=[];c=''}else c+=h}if(c||row.length){row.push(c);r.push(row)}return r.filter(x=>x.some(y=>y!==''))}
+function wavBlob(chs,sr){const n=chs[0].length,c=chs.length,b=new ArrayBuffer(44+n*c*2),d=new DataView(b),w=(o,s)=>[...s].forEach((ch,i)=>d.setUint8(o+i,ch.charCodeAt(0)));
+ w(0,'RIFF');d.setUint32(4,36+n*c*2,true);w(8,'WAVEfmt ');d.setUint32(16,16,true);d.setUint16(20,1,true);d.setUint16(22,c,true);d.setUint32(24,sr,true);d.setUint32(28,sr*c*2,true);d.setUint16(32,c*2,true);d.setUint16(34,16,true);w(36,'data');d.setUint32(40,n*c*2,true);
+ let o=44;for(let i=0;i<n;i++)for(let j=0;j<c;j++){d.setInt16(o,chs[j][i],true);o+=2}return new Blob([b],{type:'audio/wav'})}
+async function audioJob(kind){const z=new JSZip(),ctx=new (window.AudioContext||window.webkitAudioContext)();let before=0,after=0;
+ for(let i=0;i<files.length;i++){const f=files[i];msg(`Audio ${i+1}/${files.length}: ${f.name}`);const ab=await ctx.decodeAudioData(await buf(f)),
+  want=kind==='c'?+$('#o2').value:Math.min(2,ab.numberOfChannels),fmt=kind==='c'?'mp3':$('#o1').value,kb=kind==='c'?+$('#o1').value:128,sr=ab.sampleRate,
+  L=ab.getChannelData(0),R=ab.numberOfChannels>1?ab.getChannelData(1):L,to16=a=>Int16Array.from(a,x=>Math.max(-1,Math.min(1,x))*32767),
+  chs=want===1?[to16(Float32Array.from(L,(x,j)=>(x+R[j])/2))]:[to16(L),to16(R)];let blob;
+  if(fmt==='wav')blob=wavBlob(chs,sr);else{const enc=new lamejs.Mp3Encoder(want,sr,kb),parts=[],n=chs[0].length;
+   for(let p=0;p<n;p+=1152){const a=want===1?enc.encodeBuffer(chs[0].subarray(p,p+1152)):enc.encodeBuffer(chs[0].subarray(p,p+1152),chs[1].subarray(p,p+1152));if(a.length)parts.push(a)}
+   parts.push(enc.flush());blob=new Blob(parts,{type:'audio/mpeg'})}
+  before+=f.size;after+=blob.size;z.file(f.name.replace(/\.[^.]+$/,'')+'.'+fmt,blob)}
+ ctx.close();msg(`Size: ${(before/1024).toFixed(0)} KB → ${(after/1024).toFixed(0)} KB`);return{name:'audio.zip',blob:await z.generateAsync({type:'blob'})}}
+async function imgJob(){const fmt=$('#o1').value,q=+$('#o2').value,mw=+$('#o3').value,ext=fmt==='jpeg'?'jpg':fmt,z=new JSZip(),out=[];
+ for(let i=0;i<files.length;i++){msg(`Image ${i+1}/${files.length}…`);const bm=await createImageBitmap(files[i]),k=mw&&bm.width>mw?mw/bm.width:1,c=document.createElement('canvas');
+  c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);const x=c.getContext('2d');if(fmt==='jpeg'){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}x.drawImage(bm,0,0,c.width,c.height);
+  const b=await new Promise(r=>c.toBlob(r,'image/'+fmt,q));out.push([files[i].name.replace(/\.[^.]+$/,'')+'.'+ext,b])}
+ const tot=out.reduce((s,o)=>s+o[1].size,0),old=files.reduce((s,f)=>s+f.size,0);msg(`Size: ${(old/1024).toFixed(0)} KB → ${(tot/1024).toFixed(0)} KB`);
+ if(out.length===1)return{name:out[0][0],blob:out[0][1]};out.forEach(o=>z.file(o[0],o[1]));return{name:'images.zip',blob:await z.generateAsync({type:'blob'})}}
+const pdfToCanvases=async(f,scale,cb,pw)=>{const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await buf(f)),password:pw}).promise;
+ for(let n=1;n<=pdf.numPages;n++){msg(`Page ${n}/${pdf.numPages}…`);const pg=await pdf.getPage(n),vp=pg.getViewport({scale}),c=document.createElement('canvas');
+ c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;await cb(c,n,vp)}};
+const jpg=(c,q)=>new Promise(r=>c.toBlob(r,'image/jpeg',q));
+function filt(c,f){if(f==='orig')return c;const x=c.getContext('2d'),d=x.getImageData(0,0,c.width,c.height),a=d.data;let s=0;
+ if(f==='bw'){for(let i=0;i<a.length;i+=16)s+=a[i]*.3+a[i+1]*.59+a[i+2]*.11;s=s/(a.length/16)*.82}
+ for(let i=0;i<a.length;i+=4){let R=a[i],G=a[i+1],B=a[i+2];
+  if(f==='magic'){R=(R-90)*1.55+40;G=(G-90)*1.55+40;B=(B-90)*1.55+40}else{R=G=B=(R*.3+G*.59+B*.11)>s?255:0}
+  a[i]=R;a[i+1]=G;a[i+2]=B}x.putImageData(d,0,0);return c}
+async function scan(){const f=$('#o1').value,{jsPDF}=window.jspdf;let doc=null;
+ for(let i=0;i<files.length;i++){msg(`Image ${i+1}/${files.length}…`);const bm=await createImageBitmap(files[i]),k=Math.min(1,2000/Math.max(bm.width,bm.height)),
+  c=document.createElement('canvas');c.width=bm.width*k;c.height=bm.height*k;c.getContext('2d').drawImage(bm,0,0,c.width,c.height);filt(c,f);
+  const land=c.width>c.height*1.15,o=land?'l':'p';if(!doc)doc=new jsPDF({unit:'mm',format:'a4',orientation:o});else doc.addPage('a4',o);
+  const pw=land?297:210,ph=land?210:297,m=6,s=Math.min((pw-2*m)/c.width,(ph-2*m)/c.height),w=c.width*s,h=c.height*s;
+  doc.addImage(c.toDataURL('image/jpeg',.88),'JPEG',(pw-w)/2,(ph-h)/2,w,h)}
+ return{name:'scan.pdf',blob:doc.output('blob')}}
+async function merge(){const {PDFDocument}=PDFLib,out=await PDFDocument.create();
+ for(const f of files){msg('Jod raha hoon: '+f.name);const d=await PDFDocument.load(await buf(f),{ignoreEncryption:true});
+  (await out.copyPages(d,d.getPageIndices())).forEach(p=>out.addPage(p))}
+ return{name:'merged.pdf',blob:new Blob([await out.save()],{type:'application/pdf'})}}
+async function split(){const {PDFDocument}=PDFLib,src=await PDFDocument.load(await buf(files[0]),{ignoreEncryption:true}),N=src.getPageCount(),idx=[];
+ $('#o1').value.split(',').forEach(p=>{const m=p.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/);if(!m)return;const a=+m[1],b=+(m[2]||m[1]);for(let i=a;i<=b;i++)if(i>=1&&i<=N)idx.push(i-1)});
+ if(!idx.length)throw new Error(`Sahi page range likho (1 se ${N} tak)`);
+ const out=await PDFDocument.create();(await out.copyPages(src,idx)).forEach(p=>out.addPage(p));
+ return{name:'split.pdf',blob:new Blob([await out.save()],{type:'application/pdf'})}}
+async function pdf2img(){const z=new JSZip();await pdfToCanvases(files[0],+$('#o1').value,async(c,n)=>{z.file(`page-${n}.jpg`,await jpg(c,.9))});
+ msg('Zip bana raha hoon…');return{name:'pages.zip',blob:await z.generateAsync({type:'blob'})}}
+async function compress(){const q=+$('#o1').value,{jsPDF}=window.jspdf;let doc=null;
+ await pdfToCanvases(files[0],1.3,async(c,n,vp)=>{const w=vp.width*.75,h=vp.height*.75,o=w>h?'l':'p';
+  if(!doc)doc=new jsPDF({unit:'pt',format:[w,h],orientation:o});else doc.addPage([w,h],o);
+  doc.addImage((await jpg(c,q)).size?c.toDataURL('image/jpeg',q):'','JPEG',0,0,w,h)});
+ const b=doc.output('blob');msg(`Size: ${(files[0].size/1024).toFixed(0)} KB → ${(b.size/1024).toFixed(0)} KB`);
+ return{name:'compressed.pdf',blob:b}}
+(function(){const k=window.__open||decodeURIComponent(location.hash.slice(1));if(k&&(T[k]||X[k]||E[k]))T[k]?open(k):X[k]?openX(k):openE(k)})();
+</script></body></html>
