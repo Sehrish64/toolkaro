@@ -20,8 +20,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#6b7590;--ac:#1f6feb;--bd:#dde2ee;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--card:#1a2130;--tx:#eef1f8;--mut:#9aa5bf;--ac:#4c8dff;--bd:#2b3448;color-scheme:dark}}
+:root{--bg:#0B0B10;--card:#17171F;--tx:#F7F3E9;--mut:#A89F91;--ac:#F5C542;--bd:#2E2A20;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B0B10;--card:#17171F;--tx:#F7F3E9;--mut:#A89F91;--ac:#F5C542;--bd:#2E2A20;color-scheme:dark}}
 *{box-sizing:border-box}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:760px;margin:auto;padding:0 16px 40px}
@@ -33,7 +33,7 @@ h1{font-size:24px;margin:22px 0 4px}
 .card span{font-weight:600;display:block}
 .card small{color:var(--mut)}
 button{font:inherit;cursor:pointer}
-.pri{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.pri{background:var(--ac);color:#171106;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
 .pri:disabled{opacity:.5}
 .ghost{background:none;border:0;color:var(--ac);padding:8px 0;font-weight:600}
 .panel{display:none}
@@ -54,7 +54,7 @@ h3{font-size:15px;margin:22px 0 10px;color:var(--mut)}
 .ck canvas{width:100%;height:auto;display:block;touch-action:none}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .row button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:9px 12px;font-size:14px}
-.row .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.row .on{background:var(--ac);color:#171106;border-color:var(--ac)}
 #cbox{position:relative;line-height:0;overflow:hidden;display:inline-block;max-width:100%}
 #cbox img{max-width:100%;max-height:52vh;display:block;user-select:none}
 .cr{position:absolute;border:2px solid var(--ac);box-shadow:0 0 0 999px rgba(0,0,0,.45);touch-action:none}
@@ -212,7 +212,7 @@ async function rotatePdf(){const {PDFDocument,degrees}=PDFLib,d=await PDFDocumen
  return{name:'rotated.pdf',blob:new Blob([await d.save()],{type:'application/pdf'})}}
 async function docxPdf(){msg('Word file padh raha hoon\u2026');const {value}=await mammoth.convertToHtml({arrayBuffer:await buf(files[0])}),el=document.createElement('div');
  el.style.cssText='position:absolute;left:-10000px;top:0;width:794px;background:#fff;color:#000;font:15px/1.55 Georgia,serif';
- el.innerHTML='<style>table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 6px}img{max-width:100%}h1,h2,h3{font-family:sans-serif}</style>'+value;document.body.append(el);
+ el.innerHTML='<style>table{border-collapse:collapse}td,th{border:1px solid var(--bd);padding:4px 6px}img{max-width:100%}h1,h2,h3{font-family:sans-serif}</style>'+value;document.body.append(el);
  try{const {jsPDF}=window.jspdf,doc=new jsPDF({unit:'pt',format:'a4'});msg('PDF ban rahi hai\u2026');
   await new Promise(r=>doc.html(el,{callback:r,autoPaging:'text',x:0,y:0,width:523,windowWidth:794,margin:[40,36,40,36]}));return{name:files[0].name.replace(/\.[^.]+$/,'')+'.pdf',blob:doc.output('blob')}}finally{el.remove()}}
 
@@ -252,7 +252,7 @@ function vidCompress(){
 function scanPro(){
  const pages=[];let src=null,pts=[[.1,.1],[.9,.1],[.9,.9],[.1,.9]];
  $('#eb').innerHTML=`<div class="drop" id="d0">\ud83d\udcf7 Photo lo ya gallery se chuno</div><div id="sw" style="display:none">
- <div style="text-align:center"><div id="cbox" style="touch-action:none"><img id="sim"><svg id="ssv" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon id="spl" fill="rgba(31,111,235,.18)" stroke="#1f6feb" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div></div>
+ <div style="text-align:center"><div id="cbox" style="touch-action:none"><img id="sim"><svg id="ssv" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><polygon id="spl" fill="rgba(245,197,66,.18)" stroke="#F5C542" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div></div>
  <div class="row"><button id="sad">\ud83d\udd0d Auto detect</button><select id="sfl" style="width:auto"><option value="magic">Magic</option><option value="orig">Original</option><option value="gray">Gray</option><option value="bw">B&amp;W</option></select></div>
  <button class="pri" id="sadd">\u2795 Is page ko add karo</button></div><div class="sub" id="spc" style="margin-top:8px"></div>`;
  const hs=[];
